@@ -1,5 +1,5 @@
 /*
- * $Id: ui_atoms.c,v 1.7 2005-11-21 17:28:32 thebjoern Exp $
+ * $Id: ui_atoms.c,v 1.8 2016-04-21 osfpsproject Exp $
 */
 
 /**********************************************************************
@@ -12,7 +12,6 @@
 bool		m_entersound;		// after a frame, so caching won't disrupt the sound
 
 bool newUI = false;
-
 
 /*
 =================
@@ -250,8 +249,6 @@ static void UI_CalcPostGameStats() {
 
 	UI_SetBestScores(&newInfo, true);
 	UI_ShowPostGame(newHigh);
-
-
 }
 
 /*
@@ -357,13 +354,6 @@ bool UI_ConsoleCommand( int realTime ) {
 
 /* MFQ3: TODO - MM
 
-	// MFQ3: bring up the 'vehicle encyclopedia' dialog (i.e. bind command to key)
-	if( Q_stricmp (cmd, "encyclopedia") == 0 )
-	{
-		UI_EncyclopediaMenu();
-		return true;
-	}
-*/
 	// MFQ3: bring up the custom chat console
 	if( Q_stricmp( cmd, "cmessagemode") == 0 )
 	{
