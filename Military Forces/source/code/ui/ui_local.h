@@ -1,5 +1,5 @@
 /*
- * $Id: ui_local.h,v 1.10 2005-11-26 10:06:29 thebjoern Exp $
+ * $Id: ui_local.h,v 1.10 2016-04-21 osfpsproject Exp $
 */
 //
 #ifndef __UI_LOCAL_H__
@@ -1106,8 +1106,5 @@ typedef struct postGameInfo_s {
 // MFQ3 util
 
 unsigned int MF_UI_GetTeam( void );
-unsigned long MF_UI_GetGameset( bool asEnum );
-unsigned long MF_UI_Gameset_StringToValue( char * pString, bool asEnum );
-
 #endif	// __UI_LOCAL_H__
 
