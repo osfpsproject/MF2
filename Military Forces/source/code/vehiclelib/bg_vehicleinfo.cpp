@@ -6,12 +6,7 @@
 #include "bg_weaponinfo.h"
 #include "bg_datamanager.h"
 
-
-
-
-
-
-const std::string GameObjectInfo::baseModelPath = "models/vehicles/";
+const std::string GameObjectInfo::baseModelPath = "/";
 
 GameObjectInfo::GameObjectInfo() :
 	descriptiveName_(""),
@@ -93,35 +88,6 @@ GameObjectInfo::setupGameObject()
 }
 
 bool
-GameObjectInfo::createModelPath()
-{
-	modelPath_ = baseModelPath;
-
-	switch( category_ )
-	{
-	case GO_CAT_PLANE:
-		modelPath_ += "planes/";
-		break;
-	case GO_CAT_HELO:
-		modelPath_ += "helos/";
-		break;
-	case GO_CAT_GROUND:
-		modelPath_ += "ground/";
-		break;
-	case GO_CAT_BOAT:
-		modelPath_ += "sea/";
-		break;
-	case GO_CAT_INF:
-		modelPath_ += "lqms/";
-		break;
-	default:
-		Com_Error(ERR_FATAL, "Wrong category in vehicle in 'getModelPath'");
-		return false;
-	}
-	modelPath_ += modelName_ + "/" + modelName_;
-	return true;
-}
-
 std::string
 GameObjectInfo::getModelPath( bool extension )
 {
@@ -136,14 +102,14 @@ GameObjectInfo::getModelPath( bool extension )
 
 bool
 GameObjectInfo::addWeaponToLoadout( Loadout& loadout, 
-									std::string const& lookupName,
-									std::string const& displayName,
-									int maxAmmo,
-									unsigned int selectionType,
-									int turret,
-									bool limitedAngles,
-									vec3_t minAngles,
-									vec3_t maxAngles )
+	std::string const& lookupName,
+	std::string const& displayName,
+	int maxAmmo,
+	unsigned int selectionType,
+	int turret,
+	bool limitedAngles,
+	vec3_t minAngles,
+	vec3_t maxAngles )
 {
 	int idx = DataManager::getInstance().findWeaponByName(lookupName);
 	if( idx < 0 )
@@ -166,4 +132,3 @@ GameObjectInfo::addWeaponToLoadout( Loadout& loadout,
 
 	return true;
 }
-
