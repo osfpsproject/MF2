@@ -1,10 +1,12 @@
 /*
- * $Id: g_miscvehicle.c,v 1.6 2006-01-29 14:03:41 thebjoern Exp $
+ * $Id: g_miscvehicle.c,v 1.6 2016-04-21 osfpsproject Exp $
 */
 
 
 #include "g_local.h"
 
+
+// Everything here is commented out, so do we still need this file ?
 
 //------------------------------------------------------------------
 //
@@ -327,7 +329,6 @@
 //{
 //	char modelname[128];
 //	int i;
-////	unsigned long gameset = G_GetGameset();
 ////	bool found = false;
 //	unsigned long cat;
 //	gentity_t* ent = G_Spawn();
@@ -359,15 +360,12 @@
 //		else if( strcmp( ent->model, "randomground" ) == 0 ) cat = CAT_GROUND;
 //		j = 0;
 //		for( i = 0; i < bg_numberOfVehicles; ++i ) {
-//			if( (availableVehicles[i].cat & cat) &&
-//				(availableVehicles[i].gameset & gameset ) ) ++j;
+//			if( (availableVehicles[i].cat & cat) &&;
 //		}
 //		k = rand()%j+1;
 //		j = 0;
 //		for( i = 0; i < bg_numberOfVehicles; ++i ) {
-//			if( (availableVehicles[i].cat & cat) &&
-//				(availableVehicles[i].gameset & gameset ) ) {
-//				++j;
+//			if( (availableVehicles[i].cat & cat) &&;
 //				// found it
 //				if( j == k ) {
 //					found = true;
@@ -381,9 +379,6 @@
 //		for( i = 0; i < bg_numberOfVehicles; ++i ) {
 //			// vehicle is in list
 //			if( strcmp( availableVehicles[i].modelName, ent->model ) == 0 ) {
-//				if( gameset & (availableVehicles[i].gameset) ) {
-//					found = true;
-//				}
 //				break;
 //			}
 //		}
@@ -395,13 +390,13 @@
 //	}*/
 //	cat = (availableVehicles[i].cat);
 //	if( cat & CAT_PLANE ) {
-//		Com_sprintf(modelname, 127, "models/vehicles/planes/%s/%s.md3", availableVehicles[i].modelName,
+//		Com_sprintf(modelname, 127, "models/vehicles/air/%s/%s.md3", availableVehicles[i].modelName,
 //			availableVehicles[i].modelName );
 //	} else if( cat & CAT_HELO ) {
 //		Com_sprintf(modelname, 127, "models/vehicles/helos/%s/%s.md3", availableVehicles[i].modelName,
 //			availableVehicles[i].modelName );
 //	} else if( cat & CAT_LQM ) {
-//		Com_sprintf(modelname, 127, "models/vehicles/lqms/%s/%s_torso.md3", availableVehicles[i].modelName,
+//		Com_sprintf(modelname, 127, "models/vehicles/infantry/%s/%s_torso.md3", availableVehicles[i].modelName,
 //			availableVehicles[i].modelName );
 //	} else if( cat & CAT_BOAT ) {
 //		Com_sprintf(modelname, 127, "models/vehicles/boats/%s/%s.md3", availableVehicles[i].modelName,
@@ -454,7 +449,6 @@
 //{
 //	char modelname[128];
 //	int i;
-////	unsigned long gameset = G_GetGameset();
 ////	bool found = false;
 //	gentity_t* ent = G_Spawn();
 //
@@ -524,4 +518,3 @@
 //
 //	G_FreeEntity(sp_ent);
 //}
-
