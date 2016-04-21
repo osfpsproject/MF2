@@ -1,5 +1,5 @@
 /*
- * $Id: cg_vehicle.c,v 1.12 2007-06-17 17:11:12 minkis Exp $
+ * $Id: cg_vehicle.c,v 1.12 2016-04-21 osfpsproject Exp $
 */
 
 #include "cg_local.h"
@@ -168,7 +168,7 @@ static void CG_CachePlane(int index)
 	char basename[128];
 	int i;
 
-	Com_sprintf( basename, sizeof(basename), "models/vehicles/planes/%s/%s", availableVehicles[index].modelName,
+	Com_sprintf( basename, sizeof(basename), "models/vehicles/air/%s/%s", availableVehicles[index].modelName,
 			availableVehicles[index].modelName );
 
 	for( i = 0; i < BP_PLANE_MAX_PARTS; i++ ) {
@@ -345,7 +345,7 @@ static void CG_CacheLQM(int index)
 	char basename[128];
 	int i;
 
-	Com_sprintf( basename, sizeof(basename), "models/vehicles/lqms/%s/%s", availableVehicles[index].modelName,
+	Com_sprintf( basename, sizeof(basename), "models/vehicles/infantry/%s/%s", availableVehicles[index].modelName,
 			availableVehicles[index].modelName );
 // changed mg
 	for( i = 0; i < BP_LQM_MAX_PARTS; i++ ) {
@@ -369,7 +369,7 @@ static void CG_CacheLQM(int index)
 	}
 
 	// Parse LQM Animations
-	Com_sprintf( name, sizeof(name), "models/vehicles/lqms/%s/animation.cfg",  availableVehicles[index].modelName );
+	Com_sprintf( name, sizeof(name), "models/vehicles/infantry/%s/animation.cfg",  availableVehicles[index].modelName );
 	availableVehicles[index].animations = CG_ParseLQMAnimationFile(name);
 	if(!availableVehicles[index].animations) 
 		Com_Error( ERR_DROP, "MFQ3 Error: Cannot parse %s: animation.cfg\n", basename );
@@ -589,7 +589,7 @@ void CG_CacheVehicles()
 		}
 	}
 	for( i = 0; i < bg_numberOfGroundInstallations; i++ ) {
-		if( availableGroundInstallations[i].gameset & cgs.gameset ) {
+		{
 			CG_LoadingString(availableGroundInstallations[i].descriptiveName);
 			CG_CacheGroundInstallation(i);
 		}
@@ -789,7 +789,3 @@ void CG_VehicleMuzzleFlash( int weaponIdx, const refEntity_t *parent, qhandle_t 
 		refExport.AddRefEntityToScene( &flash[i] );
 	}
 }
-
-
-
-
