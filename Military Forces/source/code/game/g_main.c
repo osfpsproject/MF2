@@ -61,7 +61,6 @@ vmCvar_t	g_listEntity;
 vmCvar_t	g_spectSpeed;
 
 // MFQ3
-vmCvar_t	mf_gameset;
 vmCvar_t	mf_lvcat;
 vmCvar_t	mf_version;
 vmCvar_t	mf_mission;
@@ -84,7 +83,6 @@ cvarTable_t		gameCvarTable[] = {
 	{ &g_maxGameClients, "g_maxGameClients", "0", CVAR_SERVERINFO | CVAR_LATCH | CVAR_ARCHIVE, 0, false  },
 
 	// MFQ3 vars
-	{ &mf_gameset, "mf_gameset", "modern", CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_LATCH, 0, false  },
 	{ &mf_version, "mf_version", "unknown", CVAR_SERVERINFO | CVAR_ROM, 0, false  },
 	{ &mf_lvcat, "mf_lvcat", "0", CVAR_SERVERINFO | CVAR_ROM, 0, false },
 	{ &mf_mission, "mf_mission", "default", CVAR_SERVERINFO | CVAR_ARCHIVE | CVAR_LATCH, 0, false  },
@@ -142,7 +140,7 @@ cvarTable_t		gameCvarTable[] = {
 
 };
 
-int		gameCvarTableSize = sizeof( gameCvarTable ) / sizeof( gameCvarTable[0] );
+int gameCvarTableSize = sizeof( gameCvarTable ) / sizeof( gameCvarTable[0] );
 
 
 void G_InitGame( int levelTime, int randomSeed );
@@ -436,11 +434,7 @@ void G_ShutdownGame()
 	// write all the client session data so we can get it back
 	G_WriteSessionData();
 }
-
-
-
 //===================================================================
-
 
 
 /*
