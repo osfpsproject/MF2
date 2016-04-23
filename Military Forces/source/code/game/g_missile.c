@@ -1260,6 +1260,186 @@ void fire_ironbomb( GameEntity *self )
 	VectorCopy (start, bolt->r.currentOrigin);
 }
 
+/*
+=================
+fire_machinegun MFQ3
+=================
+*/
+void fire_machinegun( GameEntity *self, bool main )
+{
+	GameEntity	*bolt;
+	vec3_t		dir, forward, right, up, temp;
+	vec3_t		start, offset;
+	vec3_t		spreadangle;
+	int			weapIdx = (main ? self->client_->ps_.weaponIndex : availableVehicles[self->client_->vehicle_].weapons[0]);
+	float		spreadX = availableWeapons[weapIdx].spread; 
+	float		spreadY = spreadX;
+
+	// used for spread
+	VectorCopy( self->client_->ps_.vehicleAngles, spreadangle );
+	spreadX = ((rand() % (unsigned int)spreadX) - spreadX/2)/10;
+	spreadY = ((rand() % (unsigned int)spreadY) - spreadY/2)/10;
+	spreadangle[0] += spreadX;
+	spreadangle[1] += spreadY;
+//	Com_Printf( "spread %.1f %.1f\n", spreadX, spreadY );
+
+	VectorCopy( availableVehicles[self->client_->vehicle_].gunoffset, offset );
+	VectorCopy( self->s.pos.trBase, start );
+
+	if( (availableVehicles[self->client_->vehicle_].cat & CAT_GROUND) ||
+		(availableVehicles[self->client_->vehicle_].cat & CAT_BOAT) ||
+		(availableVehicles[self->client_->vehicle_].cat & CAT_HELO)) 
+	{
+		// use this to make it shoot where the player looks
+//		AngleVectors( self->client->ps.viewangles, dir, 0, 0 );
+//		VectorCopy( self->s.pos.trBase, start );
+//		start[2] += availableVehicles[self->client->vehicle].maxs[2];
+		// otherwise use this
+		AngleVectors( spreadangle, forward, right, up );
+		RotatePointAroundVector( temp, up, forward, self->client_->ps_.turretAngle );
+		CrossProduct( up, temp, right );
+		RotatePointAroundVector( dir, right, temp, self->client_->ps_.gunAngle );
+
+	} 
+	else 
+	{
+		// planes and helos for now just shoot along their direction of flight
+		AngleVectors( spreadangle, dir, right, up );
+	}
+
+	if( availableVehicles[self->client_->vehicle_].caps & HC_DUALGUNS )
+	{
+		self->bulletpos_ = ( self->bulletpos_ == 0 ? 1 : 0 );
+		if( self->bulletpos_ ) 
+			offset[1] *= -1;
+	}
+
+	VectorMA( start, offset[0], dir, start );
+	VectorMA( start, offset[1], right, start );
+	VectorMA( start, offset[2], up, start );
+	SnapVector( start );
+
+	bolt = theLevel.spawnEntity();
+	bolt->classname_ = "bullet";
+	bolt->nextthink_ = theLevel.time_ + 4000;
+	bolt->setThink(new GameEntity::EntityFunc_Free);
+	bolt->r.svFlags = SVF_USE_CURRENT_ORIGIN;
+	bolt->s.weaponIndex = weapIdx;
+	//availableVehicles[self->client->vehicle].weapons[WP_MACHINEGUN];
+	bolt->r.ownerNum = self->s.number;
+	bolt->parent_ = self;
+	bolt->damage_ = availableWeapons[weapIdx].damage;
+	//availableWeapons[availableVehicles[self->client->vehicle].weapons[WP_MACHINEGUN]].damage;
+	bolt->targetcat_ = availableWeapons[weapIdx].category;
+	bolt->catmodifier_ = availableWeapons[weapIdx].noncatmod;
+	bolt->methodOfDeath_ = MOD_AUTOCANNON;
+	bolt->clipmask_ = MASK_SHOT;
+	bolt->target_ent_ = NULL;
+	bolt->s.pos.trType = TR_LINEAR;
+	bolt->s.pos.trTime = theLevel.time_ - MISSILE_PRESTEP_TIME;		// move a bit on the very first frame
+	//tracer
+	self->tracerindex_--;
+	if( self->tracerindex_ < 0 ) 
+		self->tracerindex_ = 255;
+	bolt->s.eType = ET_BULLET;
+	bolt->s.generic1 = self->tracerindex_;
+	VectorCopy( start, bolt->s.pos.trBase );
+//	VectorScale( dir, availableWeapons[availableVehicles[self->client->vehicle].weapons[WP_MACHINEGUN]].muzzleVelocity, bolt->s.pos.trDelta );
+	VectorScale( dir, availableWeapons[weapIdx].muzzleVelocity, bolt->s.pos.trDelta );
+	SnapVector( bolt->s.pos.trDelta );			// save net bandwidth
+	VectorCopy (start, bolt->r.currentOrigin);
+}
+
+
+/*
+=================
+fire_rifle MFQ3
+=================
+*/
+void fire_rifle( GameEntity *self, bool main )
+{
+	GameEntity	*bolt;
+	vec3_t		dir, forward, right, up, temp;
+	vec3_t		start, offset;
+	vec3_t		spreadangle;
+	int			weapIdx = (main ? self->client_->ps_.weaponIndex : availableVehicles[self->client_->vehicle_].weapons[0]);
+	float		spreadX = availableWeapons[weapIdx].spread; 
+	float		spreadY = spreadX;
+
+	// used for spread
+	VectorCopy( self->client_->ps_.vehicleAngles, spreadangle );
+	spreadX = ((rand() % (unsigned int)spreadX) - spreadX/2)/10;
+	spreadY = ((rand() % (unsigned int)spreadY) - spreadY/2)/10;
+	spreadangle[0] += spreadX;
+	spreadangle[1] += spreadY;
+//	Com_Printf( "spread %.1f %.1f\n", spreadX, spreadY );
+
+	VectorCopy( availableVehicles[self->client_->vehicle_].gunoffset, offset );
+	VectorCopy( self->s.pos.trBase, start );
+
+	if( (availableVehicles[self->client_->vehicle_].cat & CAT_GROUND) ||
+		(availableVehicles[self->client_->vehicle_].cat & CAT_BOAT) ||
+		(availableVehicles[self->client_->vehicle_].cat & CAT_HELO)) 
+	{
+		// use this to make it shoot where the player looks
+//		AngleVectors( self->client->ps.viewangles, dir, 0, 0 );
+//		VectorCopy( self->s.pos.trBase, start );
+//		start[2] += availableVehicles[self->client->vehicle].maxs[2];
+		// otherwise use this
+		AngleVectors( spreadangle, forward, right, up );
+		RotatePointAroundVector( temp, up, forward, self->client_->ps_.turretAngle );
+		CrossProduct( up, temp, right );
+		RotatePointAroundVector( dir, right, temp, self->client_->ps_.gunAngle );
+
+	} 
+	else 
+	{
+		// planes and helos for now just shoot along their direction of flight
+		AngleVectors( spreadangle, dir, right, up );
+	}
+
+	if( availableVehicles[self->client_->vehicle_].caps & HC_DUALGUNS )
+	{
+		self->bulletpos_ = ( self->bulletpos_ == 0 ? 1 : 0 );
+		if( self->bulletpos_ ) 
+			offset[1] *= -1;
+	}
+
+	VectorMA( start, offset[0], dir, start );
+	VectorMA( start, offset[1], right, start );
+	VectorMA( start, offset[2], up, start );
+	SnapVector( start );
+
+	bolt = theLevel.spawnEntity();
+	bolt->classname_ = "bullet";
+	bolt->nextthink_ = theLevel.time_ + 4000;
+	bolt->setThink(new GameEntity::EntityFunc_Free);
+	bolt->r.svFlags = SVF_USE_CURRENT_ORIGIN;
+	bolt->s.weaponIndex = weapIdx;
+	//availableVehicles[self->client->vehicle].weapons[WP_MACHINEGUN];
+	bolt->r.ownerNum = self->s.number;
+	bolt->parent_ = self;
+	bolt->damage_ = availableWeapons[weapIdx].damage;
+	//availableWeapons[availableVehicles[self->client->vehicle].weapons[WP_MACHINEGUN]].damage;
+	bolt->targetcat_ = availableWeapons[weapIdx].category;
+	bolt->catmodifier_ = availableWeapons[weapIdx].noncatmod;
+	bolt->methodOfDeath_ = MOD_AUTOCANNON;
+	bolt->clipmask_ = MASK_SHOT;
+	bolt->target_ent_ = NULL;
+	bolt->s.pos.trType = TR_LINEAR;
+	bolt->s.pos.trTime = theLevel.time_ - MISSILE_PRESTEP_TIME;		// move a bit on the very first frame
+	//tracer
+	self->tracerindex_--;
+	if( self->tracerindex_ < 0 ) 
+		self->tracerindex_ = 255;
+	bolt->s.eType = ET_BULLET;
+	bolt->s.generic1 = self->tracerindex_;
+	VectorCopy( start, bolt->s.pos.trBase );
+//	VectorScale( dir, availableWeapons[availableVehicles[self->client->vehicle].weapons[WP_MACHINEGUN]].muzzleVelocity, bolt->s.pos.trDelta );
+	VectorScale( dir, availableWeapons[weapIdx].muzzleVelocity, bolt->s.pos.trDelta );
+	SnapVector( bolt->s.pos.trDelta );			// save net bandwidth
+	VectorCopy (start, bolt->r.currentOrigin);
+}
 
 /*
 =================
@@ -1955,5 +2135,3 @@ void fire_flak_GI (GameEntity *self)
 	VectorCopy (start, bolt->r.currentOrigin);
 	
 }
-
-
