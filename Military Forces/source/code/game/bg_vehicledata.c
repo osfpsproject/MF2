@@ -1316,6 +1316,7 @@ completeVehicleData_t availableVehicles[] =
 	0,							// max bay frame
 	0,							// renderflags
 	{-12,0,60,60},				// shadow coordinates
+
 	{0,0,0,0}					// shadow orientation adjusters
 	},
 	
@@ -1354,7 +1355,7 @@ completeVehicleData_t availableVehicles[] =
 	285,						// max gun pitch (upwards = negative) <- gearheight
 	5,							// min gun pitch (downwards = positive) <- tailangle
 	0, WI_ASM_8KG, 0, 0, 0, 0, 0, 0,	// weapons
-	0, 2, 0, 0, 0, 0, 0, 0,	// ammo
+	0, 2, 0, 0, 0, 0, 0, 0,		// ammo
 	1,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -1373,10 +1374,9 @@ completeVehicleData_t availableVehicles[] =
     },
 
 	// Rebels
-	
 	{	"Mil Mi-24 Hind",				// descriptiveName
 	"Hind",						// tinyName
-	"Hind",					// modelName
+	"Hind",						// modelName
 	SHADOW_DEFAULT,				// alpha shadow
 	MF_GAMESET_MODERN,			// id
 	MF_TEAM_2,
@@ -1461,7 +1461,7 @@ completeVehicleData_t availableVehicles[] =
 	WI_MG_8X7_62MM, 0, 0, 0, 0, 0, 0, 0,	// weapons
 	300, 0, 0, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
-	{-4, 0, 6},					// cameraposition for cockpit view
+	{-4, 0, 8},					// cameraposition for cockpit view
 	0,							// effect model
 	0,							// radar range
 	0,							// radar range ground
@@ -1772,8 +1772,8 @@ completeVehicleData_t availableVehicles[] =
 	{3, 1, 6},					// gun tag
 	285,						// max gun pitch (upwards = negative) <- gearheight
 	5,							// min gun pitch (downwards = positive) <- tailangle
-	WI_MG_1X14_5MM, 0, 0, 0, 0, 0, 0, 0,	// weapons
-	500, 0, 0, 0, 0, 0, 0, 0,	// ammo
+	WI_MG_1X14_5MM, WI_HEALTHCRATE, WI_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
+	500, 5, 2, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -1822,8 +1822,8 @@ completeVehicleData_t availableVehicles[] =
 	{3, 1, 6},					// gun tag
 	285,						// max gun pitch (upwards = negative) <- gearheight
 	5,							// min gun pitch (downwards = positive) <- tailangle
-	WI_MG_1X7_62MM, 0, 0, 0, 0, 0, 0, 0,	// weapons
-	800, 0, 0, 0, 0, 0, 0, 20,	// ammo
+	WI_MG_1X7_62MM, WI_HEALTHCRATE, WI_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
+	800, 5, 2, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
