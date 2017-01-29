@@ -1,5 +1,5 @@
 /*
- * $Id: bg_public.h,v 1.2 2016-04-04 osfpsproject Exp $
+ * $Id: bg_public.h,v 1.3 2016-04-21 osfpsproject Exp $
 */
 
 // Copyright (C) 1999-2000 Id Software, Inc.
@@ -180,13 +180,10 @@ typedef enum {
 	STAT_HEALTH,
 	STAT_CLIENTS_READY,				// bit mask of clients wishing to exit the intermission (FIXME: configstring?)
 	STAT_MAX_HEALTH,				// health limit, changable by handicap
-	STAT_FUEL,
-	STAT_MAX_FUEL,
 	STAT_LOCKINFO,
 } statIndex_t;
 
 typedef enum {
-	TIMER_FUEL,
 	TIMER_THROTTLE,
 	TIMER_GEAR,
 	TIMER_GEARANIM,
@@ -486,7 +483,6 @@ typedef enum {
 	IT_BAD,
 	IT_AMMO,				// EFX: rotate
 	IT_HEALTH,				// EFX: static external sphere + rotating internal
-	IT_FUEL,
 	IT_TEAM
 } itemType_t;
 
@@ -874,7 +870,6 @@ typedef struct completeVehicleData_s
     unsigned int    accel;			// vehicle dependent acceleration
     unsigned int    maxhealth;	    // health
 	vec3_t			gunoffset;		// guntag
-	unsigned int	maxfuel;		// maximum fuel
 	float			gearheight;		// height of gear
 	float				tailangle;		// for taildraggers on ground
 	unsigned int	weapons[MAX_WEAPONS_PER_VEHICLE];// use index from available Weapons
@@ -904,23 +899,69 @@ extern int bg_numberOfVehicles;
 
 extern completeLoadout_t availableLoadouts[MAX_LOADOUTS];
 
-// types of weapons
-typedef enum {
-	WT_MACHINEGUN,
-	WT_BALLISTICGUN,
-	WT_ROCKET,
-	WT_IRONBOMB,
-	WT_GUIDEDBOMB,
-	WT_ANTIAIRMISSILE,
-	WT_ANTIGROUNDMISSILE,
-	WT_ANTIRADARMISSILE,
-	WT_FUELTANK,
-	WT_FLARE,
-	WT_NUKEBOMB,
-	WT_FUELCRATE,
-	WT_AMMOCRATE,
-	WT_HEALTHCRATE
-}weaponType_t;
+// types of weapons (make sure in sync with availableWeapons[] !!
+typedef enum
+{
+	WI_AR_1X5_45MM,
+	WI_AR_1X5_56MM,
+	WI_SMG_1X5_7MM,
+	WI_R_1X7_62MM,
+	WI_MG_1X7_62MM,
+	WI_MG_1X12_7MM
+	WI_MG_1X14_5MM
+	WI_MG_2X7_62MM
+	WI_MG_2X7_92MM
+	WI_MG_1X13MM
+	WI_MG_2X13MM
+	WI_MG_4X12_7MM
+	WI_MG_8X7_62MM
+	WI_ACN_1X20MM
+	WI_ACN_1X25MM
+	WI_ACN_1X27MM
+	WI_ACN_1X30MM
+	WI_ACN_2X20MM
+	WI_ACN_2X23MM
+	WI_ACN_4X23MM
+	WI_CNN_1X50MM
+	WI_CNN_1X75MM
+	WI_CNN_1X100MM
+	WI_CNN_1X120MM
+	WI_HOW_1X203MM
+	WI_AAM_7KG
+	WI_AAM_11KG
+	WI_AAM_23KG
+	WI_AAM_39KG
+	WI_AAM_40KG
+	WI_AAM_60KG
+	WI_SAM_3KG
+	WI_ASM_8KG
+	WI_ASM_9KG
+	WI_ASM_57KG
+	WI_ASM_66KG
+	WI_SSM_0_6KG
+	WI_SSM_0_7KG
+	WI_SSM_90KG
+	WI_BMB_227KG
+	WI_BMB_460KG
+	WI_BMB_940KG
+	WI_ICB_ANM50
+	WI_NB_B82
+	WI_GBMB_GBU15
+	WI_GBMB_GBU31
+	WI_GBMB_BLU107
+	WI_ECM,
+	WI_CM, 				//This is like WI_FLARE, but will show up on a pylon instead of just being a value concerning the internal flare count
+	WI_LASE,
+	WI_DROPTANK_SMALL,
+	WI_DROPTANK_PAIR,
+	WI_HEALTHCRATE,
+	WI_AMMOCRATE,
+	WI_VEHICLE_REPAIRCRATE,
+	WI_VEHICLE_AMMOCRATE,
+	WI_AP_AV_MINE,
+	WI_FLARE,	
+	WI_CFLARE,
+}weaponIndex_t;
 
 // weaponflags
 #define	WF_NONE						0
@@ -975,8 +1016,6 @@ typedef struct completeWeaponData_s
 	unsigned int	category;			// which category can it damage
 	float			noncatmod;			// modifier for hitting wrong category
 	unsigned int	muzzleVelocity;		// speed at which it starts
-	float			range;				// target acquiring range
-	unsigned int	fuelrange;			// for how long lasts its fuel
 	unsigned int	fireInterval;		// time between two shots
 	unsigned int	damage;				// damage done to target
 	unsigned int	damageRadius;		// radius that damage is applied to
@@ -1005,72 +1044,6 @@ extern completeWeaponData_t	availableWeapons[];
 
 // number of available vehicles
 extern int bg_numberOfWeapons;
-
-// ...and their index (make sure in sync with availableWeapons[] !!
-typedef enum
-{
-	WI_AR_1X5_45MM,
-	WI_AR_1X5_56MM,
-	WI_SMG_1X5_7MM,
-	WI_R_1X7_62MM,
-	WI_MG_1X7_62MM,
-	WI_MG_1X12_7MM
-	WI_MG_1X14_5MM
-	WI_MG_2X7_62MM
-	WI_MG_2X7_92MM
-	WI_MG_1X13MM
-	WI_MG_2X13MM
-	WI_MG_4X12_7MM
-	WI_MG_8X7_62MM
-	WI_ACN_1X20MM
-	WI_ACN_1X25MM
-	WI_ACN_1X27MM
-	WI_ACN_1X30MM
-	WI_ACN_2X20MM
-	WI_ACN_2X23MM
-	WI_ACN_4X23MM
-	WI_CNN_1X50MM
-	WI_CNN_1X75MM
-	WI_CNN_1X100MM
-	WI_CNN_1X120MM
-	WI_HOW_1X203MM
-	WI_AAM_7KG
-	WI_AAM_11KG
-	WI_AAM_23KG
-	WI_AAM_39KG
-	WI_AAM_40KG
-	WI_AAM_60KG
-	WI_SAM_3KG
-	WI_ASM_8KG
-	WI_ASM_9KG
-	WI_ASM_57KG
-	WI_ASM_66KG
-	WI_SSM_0_6KG
-	WI_SSM_0_7KG
-	WI_SSM_90KG
-	WI_BMB_227KG
-	WI_BMB_460KG
-	WI_BMB_940KG
-	WI_ICB_ANM50
-	WI_NB_B82
-	WI_GBMB_GBU15
-	WI_GBMB_GBU31
-	WI_GBMB_BLU107
-	WI_ECM,
-	WI_CM, 				//This is like WI_FLARE, but will show up on a pylon instead of just being a value concerning the internal flare count
-	WI_LASE,
-	WI_DROPTANK,
-	WI_DROPTANK_SMALL,
-	WI_DROPTANK_PAIR,
-	WI_HEALTHCRATE,
-	WI_AMMOCRATE,
-	WI_VEHICLE_REPAIRCRATE,
-	WI_VEHICLE_AMMOCRATE,
-	WI_AP_AV_MINE,
-	WI_FLARE,	
-	WI_CFLARE,
-}weaponIndex_t;
-
 
 // IGME
 #define IGME_MAX_VEHICLES		64
@@ -1264,4 +1237,3 @@ typedef enum {
 // maximum radius of the models during the effect
 #define NUKE_SHOCKWAVE_MAXRADIUS		1000
 #define NUKE_SHOCKWAVE2_MAXRADIUS		1000
-

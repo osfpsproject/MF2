@@ -1,5 +1,5 @@
 /*
- * $Id: bg_vehicledata.c,v 1.7 2016-04-04 osfpsproject Exp $
+ * $Id: bg_vehicledata.c,v 1.7 2016-04-07 osfpsproject Exp $
 */
 
 #include "q_shared.h"
@@ -18,11 +18,10 @@ completeVehicleData_t availableVehicles[] =
 	
 	// Coalition soldier (5,56 mm assault rifle)
 {	"Soldier (5,56 mm assault rifle)",	// descriptiveName
-	"coalition_soldier",		// tinyName
-	"coalition_soldier",		// modelName
-	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	"coalition_infantry (m4)",	// tinyName
+	"models/infantry/coalition_infantry_m4",	// modelName
+	SHADOW_DEFAULT,				// alpha shadow			
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
@@ -68,11 +67,10 @@ completeVehicleData_t availableVehicles[] =
 	
 	// Coalition medic (7,62 mm rifle)
 {	"Coalition medic (7,62 mm rifle)",	// descriptiveName
-	"coalition_medic",			// tinyName
-	"coalition_medic",			// modelName
+	"coalition_infantry (m14)",	// tinyName
+	"models/infantry/coalition_infantry_m14",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
@@ -97,8 +95,8 @@ completeVehicleData_t availableVehicles[] =
 	{0, 0, 0},					// gun tag
 	0,							// max gun pitch (upwards = negative) <- gearheight
 	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_R_1X7_62MM, WI_FLARE, 0, 0, 0, 0, 0, 0,	// weapons
-	125, 5, 0, 0, 0, 0, 0, 0,	// ammo
+	WI_R_1X7_62MM, WI_FLARE, WI_HEALTHCRATE, 0, 0, 0, 0, 0,	// weapons
+	125, 5, 4, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -118,11 +116,10 @@ completeVehicleData_t availableVehicles[] =
 
 	// Coalition engineer (5,7 mm submachine gun)
 {	"Engineer (5,7 mm submachine gun)",	// descriptiveName
-	"coalition_engineer",		// tinyName
-	"coalition_engineer",		// modelName
+	"coalition_infantry (mp5)",	// tinyName
+	"models/infantry/coalition_infantry_mp5",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
@@ -147,8 +144,8 @@ completeVehicleData_t availableVehicles[] =
 	{0, 0, 0},					// gun tag
 	0,							// max gun pitch (upwards = negative) <- gearheight
 	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_SMG_1X5_7MM, WI_FLARE, 0, 0, 0, 0, 0, 0,	// weapons
-	240, 5, 0, 0, 0, 0, 0, 0,	// ammo
+	WI_SMG_1X5_7MM, WI_FLARE, WI_VEHICLE_REPAIRCRATE, 0, 0, 0, 0, 0,	// weapons
+	240, 5, 2, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -168,15 +165,14 @@ completeVehicleData_t availableVehicles[] =
     
 	// Coalition fieldops (M72law)
 {	"Coalition fieldops (M72law)",		// descriptiveName
-	"coalition_fieldops",		// tinyName
-	"coalition_fieldops",		// modelName
+	"coalition_infantry (M72)",	// tinyName
+	"models/infantry/coalition_infantry_m72",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
-	0,	// capabilities
+	0,							// capabilities
 	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
 	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
 	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
@@ -197,8 +193,8 @@ completeVehicleData_t availableVehicles[] =
 	{0, 0, 0},					// gun tag
 	0,							// max gun pitch (upwards = negative) <- gearheight
 	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_SSM_0_6KG, WI_FLARE, 0, 0, 0, 0, 0, 0,	// weapons
-	6, 5, 0, 0, 0, 0, 0, 0,		// ammo
+	WI_SSM_0_6KG, WI_FLARE, WI_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
+	6, 5, 4, 0, 0, 0, 0, 0,		// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -218,15 +214,14 @@ completeVehicleData_t availableVehicles[] =
     
 	// Coalition covertops (7,62 mm rifle)
 {	"Coalition covertops (7,62 mm rifle)",	// descriptiveName
-	"coalition_covertops",		// tinyName
-	"coalition_covertops",		// modelName
+	"coalition_infantry (m40a5)",		// tinyName
+	"models/infantry/coalition_infantry_m40a5",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
-	0,	// capabilities
+	0,							// capabilities
 	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
 	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
 	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
@@ -247,8 +242,8 @@ completeVehicleData_t availableVehicles[] =
 	{0, 0, 0},					// gun tag
 	0,							// max gun pitch (upwards = negative) <- gearheight
 	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_R_1X7_62MM, WI_FLARE, 0, 0, 0, 0, 0, 0,	// weapons
-	60, 5, 0, 0, 0, 0, 0, 0,	// ammo
+	WI_R_1X7_62MM, WI_FLARE, WI_AP_AV_MINE, 0, 0, 0, 0, 0,	// weapons
+	60, 5, 4, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -268,11 +263,10 @@ completeVehicleData_t availableVehicles[] =
 
 	// Rebels soldier (5,45 mm assault rifle)
 {	"Soldier (5,45 mm assault rifle)",	// descriptiveName
-	"rebels_soldier",					// tinyName
-	"rebels_soldier",			// modelName
+	"rebels_infantry (ak74)",	// tinyName
+	"models/infantry/rebels_infantry_ak74",		// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
@@ -284,7 +278,7 @@ completeVehicleData_t availableVehicles[] =
 	//{0, 0, 0},				// camera distance {min,max,default}
 	//{2.5, 2.5, 2.5},			// camera height {min,max,default}
 	{0, 10, 0},					// camera distance {min,max,default}
-	{0, 10, 2.5},					// camera height {min,max,default}
+	{0, 10, 2.5},				// camera height {min,max,default}
 	0,							// stallspeed
 	24,							// maxspeed
 	0,							// min throttle
@@ -318,165 +312,14 @@ completeVehicleData_t availableVehicles[] =
 	
 	// Rebels medic (7,62 mm rifle)
 {	"Medic (7,62 mm rifle)",	// descriptiveName
-	"rebels_medic",					// tinyName
-	"rebels_medic",					// modelName
+	"rebels_infantry (SKS)",	// tinyName
+	"models/infantry/rebels_infantry_sks",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_LQM,
 	CLASS_LQM_INFANTRY,
 	0,							// flags
-	0,	// capabilities
-	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
-	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
-	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
-	{50, 125, 70},				// turnspeed around the three axis
-	//{0, 0, 0},					// camera distance {min,max,default}
-	//{2.5, 2.5, 2.5},					// camera height {min,max,default}
-	{0, 10, 0},					// camera distance {min,max,default}
-	{0, 10, 2.5},					// camera height {min,max,default}
-	0,							// stallspeed
-	24,							// maxspeed
-	0,							// min throttle
-	0,						    // max throttle
-	0,							// engines
-	0,							// wheels
-	0,							// wheel circumference
-	0,							// acceleration
-	10,							// health
-	{0, 0, 0},					// gun tag
-	0,							// max gun pitch (upwards = negative) <- gearheight
-	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_R_1X7_62MM, WI_FLARE, 0, 0, 0, 0, 0, 0,		// weapons
-	125, 5, 0, 0, 0, 0, 0, 0,	// ammo
-	0,0,0,0,0,0,0,0,			// turret
-	{0, 0, 10},					// cameraposition for cockpit view
-	0,							// effect model
-	0,							// radar range
-	0,							// radar range ground
-	-1,							// trackcone
-	0,							// trackcone ground
-	0,							// swingangle
-	0,							// geartime
-	0,							// max gear frame
-	0,							// baytime
-	0,							// max bay frame
-	0,							// renderflags
-	{0,0,0,0},					// shadow coordinates
-	{0,0,0,0}					// shadow orientation adjusters
-    },
-
-	// Rebels engineer (5,7 mm submachine gun)
-{	"Engineer (5,7 mm submachine gun)",	// descriptiveName
-	"rebels_engineer",					// tinyName
-	"rebels_engineer",					// modelName
-	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
-	CAT_LQM,
-	CLASS_LQM_INFANTRY,
-	0,							// flags
-	0,	// capabilities
-	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
-	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
-	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
-	{50, 125, 70},				// turnspeed around the three axis
-	//{0, 0, 0},				// camera distance {min,max,default}
-	//{2.5, 2.5, 2.5},				// camera height {min,max,default}
-	{0, 10, 0},					// camera distance {min,max,default}
-	{0, 10, 2.5},					// camera height {min,max,default}
-	0,							// stallspeed
-	24,							// maxspeed
-	0,							// min throttle
-	0,						    // max throttle
-	0,							// engines
-	0,							// wheels
-	0,							// wheel circumference
-	0,							// acceleration
-	10,							// health
-	{0, 0, 0},					// gun tag
-	0,							// max gun pitch (upwards = negative) <- gearheight
-	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_SMG_1X5_7MM, WI_FLARE, 0, 0, 0, 0, 0, 0,	// weapons
-	240, 5, 0, 0, 0, 0, 0, 0,		// ammo
-	0,0,0,0,0,0,0,0,			// turret
-	{0, 0, 10},					// cameraposition for cockpit view
-	0,							// effect model
-	0,							// radar range
-	0,							// radar range ground
-	-1,							// trackcone
-	0,							// trackcone ground
-	0,							// swingangle
-	0,							// geartime
-	0,							// max gear frame
-	0,							// baytime
-	0,							// max bay frame
-	0,							// renderflags
-	{0,0,0,0},					// shadow coordinates
-	{0,0,0,0}					// shadow orientation adjusters
-    },
-    
-	// Rebels fieldops (RPG-7V2)
-{	"Rebels fieldops (RPG-7V2)",	// descriptiveName
-	"rebels_fieldops",			// tinyName
-	"rebels_fieldops",			// modelName
-	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
-	CAT_LQM,
-	CLASS_LQM_INFANTRY,
-	0,							// flags
-	0,	// capabilities
-	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
-	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
-	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
-	{50, 125, 70},				// turnspeed around the three axis
-	//{0, 0, 0},					// camera distance {min,max,default}
-	//{2.5, 2.5, 2.5},					// camera height {min,max,default}
-	{0, 10, 0},					// camera distance {min,max,default}
-	{0, 10, 2.5},					// camera height {min,max,default}
-	0,							// stallspeed
-	24,							// maxspeed
-	0,							// min throttle
-	0,						    // max throttle
-	0,							// engines
-	0,							// wheels
-	0,							// wheel circumference
-	0,							// acceleration
-	10,							// health
-	{0, 0, 0},					// gun tag
-	0,							// max gun pitch (upwards = negative) <- gearheight
-	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_SSM_0_7KG, WI_FLARE, 0, 0, 0, 0, 0, 0,		// weapons
-	6, 5, 0, 0, 0, 0, 0, 0,		// ammo
-	0,0,0,0,0,0,0,0,			// turret
-	{0, 0, 10},					// cameraposition for cockpit view
-	0,							// effect model
-	0,							// radar range
-	0,							// radar range ground
-	-1,							// trackcone
-	0,							// trackcone ground
-	0,							// swingangle
-	0,							// geartime
-	0,							// max gear frame
-	0,							// baytime
-	0,							// max bay frame
-	0,							// renderflags
-	{0,0,0,0},					// shadow coordinates
-	{0,0,0,0}					// shadow orientation adjusters
-    },
-    
-	// Rebels covertops (7,62 mm rifle)
-{	"Covertops (7,62 mm rifle)",	// descriptiveName
-	"rebels_covertops",			// tinyName
-	"rebels_covertops",			// modelName
-	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
-	CAT_LQM,
-	CLASS_LQM_INFANTRY,
-	0,							// flags
-	0,	// capabilities
+	0,							// capabilities
 	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
 	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
 	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
@@ -497,8 +340,155 @@ completeVehicleData_t availableVehicles[] =
 	{0, 0, 0},					// gun tag
 	0,							// max gun pitch (upwards = negative) <- gearheight
 	0,							// min gun pitch (downwards = positive) <- tailangle
-	WI_R_1X7_62MM, WI_FLARE, 0, 0, 0, 0, 0, 0,		// weapons
-	60, 5, 0, 0, 0, 0, 0, 0,		// ammo
+	WI_R_1X7_62MM, WI_FLARE, WI_HEALTHCRATE, 0, 0, 0, 0, 0,		// weapons
+	125, 5, 4, 0, 0, 0, 0, 0,	// ammo
+	0,0,0,0,0,0,0,0,			// turret
+	{0, 0, 10},					// cameraposition for cockpit view
+	0,							// effect model
+	0,							// radar range
+	0,							// radar range ground
+	-1,							// trackcone
+	0,							// trackcone ground
+	0,							// swingangle
+	0,							// geartime
+	0,							// max gear frame
+	0,							// baytime
+	0,							// max bay frame
+	0,							// renderflags
+	{0,0,0,0},					// shadow coordinates
+	{0,0,0,0}					// shadow orientation adjusters
+    },
+
+	// Rebels engineer (5,7 mm submachine gun)
+{	"Engineer (5,7 mm submachine gun)",	// descriptiveName
+	"rebels_infantry (mp5)",	// tinyName
+	"models/infantry/rebels_infantry_mp5",	// modelName
+	SHADOW_DEFAULT,				// alpha shadow
+	MF_TEAM_2,					// id
+	CAT_LQM,
+	CLASS_LQM_INFANTRY,
+	0,							// flags
+	0,							// capabilities
+	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
+	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
+	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
+	{50, 125, 70},				// turnspeed around the three axis
+	//{0, 0, 0},				// camera distance {min,max,default}
+	//{2.5, 2.5, 2.5},			// camera height {min,max,default}
+	{0, 10, 0},					// camera distance {min,max,default}
+	{0, 10, 2.5},				// camera height {min,max,default}
+	0,							// stallspeed
+	24,							// maxspeed
+	0,							// min throttle
+	0,						    // max throttle
+	0,							// engines
+	0,							// wheels
+	0,							// wheel circumference
+	0,							// acceleration
+	10,							// health
+	{0, 0, 0},					// gun tag
+	0,							// max gun pitch (upwards = negative) <- gearheight
+	0,							// min gun pitch (downwards = positive) <- tailangle
+	WI_SMG_1X5_7MM, WI_FLARE, WI_VEHICLE_REPAIRCRATE, 0, 0, 0, 0, 0,	// weapons
+	240, 5, 2, 0, 0, 0, 0, 0,	// ammo
+	0,0,0,0,0,0,0,0,			// turret
+	{0, 0, 10},					// cameraposition for cockpit view
+	0,							// effect model
+	0,							// radar range
+	0,							// radar range ground
+	-1,							// trackcone
+	0,							// trackcone ground
+	0,							// swingangle
+	0,							// geartime
+	0,							// max gear frame
+	0,							// baytime
+	0,							// max bay frame
+	0,							// renderflags
+	{0,0,0,0},					// shadow coordinates
+	{0,0,0,0}					// shadow orientation adjusters
+    },
+    
+	// Rebels fieldops (RPG-7V2)
+{	"Rebels fieldops (RPG-7V2)",	// descriptiveName
+	"rebels_infantry (RPG-7V2)",	// tinyName
+	"models/infantry/rebels_infantry_rpg7v2",	// modelName
+	SHADOW_DEFAULT,				// alpha shadow
+	MF_TEAM_2,					// id
+	CAT_LQM,
+	CLASS_LQM_INFANTRY,
+	0,							// flags
+	0,							// capabilities
+	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
+	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
+	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
+	{50, 125, 70},				// turnspeed around the three axis
+	//{0, 0, 0},				// camera distance {min,max,default}
+	//{2.5, 2.5, 2.5},			// camera height {min,max,default}
+	{0, 10, 0},					// camera distance {min,max,default}
+	{0, 10, 2.5},				// camera height {min,max,default}
+	0,							// stallspeed
+	24,							// maxspeed
+	0,							// min throttle
+	0,						    // max throttle
+	0,							// engines
+	0,							// wheels
+	0,							// wheel circumference
+	0,							// acceleration
+	10,							// health
+	{0, 0, 0},					// gun tag
+	0,							// max gun pitch (upwards = negative) <- gearheight
+	0,							// min gun pitch (downwards = positive) <- tailangle
+	WI_SSM_0_7KG, WI_FLARE, WI_AMMOCRATE, 0, 0, 0, 0, 0,		// weapons
+	6, 5, 4, 0, 0, 0, 0, 0,		// ammo
+	0,0,0,0,0,0,0,0,			// turret
+	{0, 0, 10},					// cameraposition for cockpit view
+	0,							// effect model
+	0,							// radar range
+	0,							// radar range ground
+	-1,							// trackcone
+	0,							// trackcone ground
+	0,							// swingangle
+	0,							// geartime
+	0,							// max gear frame
+	0,							// baytime
+	0,							// max bay frame
+	0,							// renderflags
+	{0,0,0,0},					// shadow coordinates
+	{0,0,0,0}					// shadow orientation adjusters
+    },
+    
+	// Rebels covertops (7,62 mm rifle)
+{	"Covertops (7,62 mm rifle)",	// descriptiveName
+	"rebels_infantry (dragunov)",	// tinyName
+	"models/infantry/rebels_infantry_dragunov",	// modelName
+	SHADOW_DEFAULT,				// alpha shadow
+	MF_TEAM_2,					// id
+	CAT_LQM,
+	CLASS_LQM_INFANTRY,
+	0,							// flags
+	0,							// capabilities
+	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
+	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
+	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
+	{50, 125, 70},				// turnspeed around the three axis
+	//{0, 0, 0},				// camera distance {min,max,default}
+	//{2.5, 2.5, 2.5},			// camera height {min,max,default}
+	{0, 10, 0},					// camera distance {min,max,default}
+	{0, 10, 2.5},				// camera height {min,max,default}
+	0,							// stallspeed
+	24,							// maxspeed
+	0,							// min throttle
+	0,						    // max throttle
+	0,							// engines
+	0,							// wheels
+	0,							// wheel circumference
+	0,							// acceleration
+	10,							// health
+	{0, 0, 0},					// gun tag
+	0,							// max gun pitch (upwards = negative) <- gearheight
+	0,							// min gun pitch (downwards = positive) <- tailangle
+	WI_R_1X7_62MM, WI_FLARE, WI_AP_AV_MINE, 0, 0, 0, 0, 0,		// weapons
+	60, 5, 4, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -525,10 +515,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-16 Falcon
     {	"F-16 Falcon",			// descriptiveName
 	"F-16",						// tinyName
-	"f-16",						// modelName
+	"models/vehicles/air/f-16",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -574,10 +563,9 @@ completeVehicleData_t availableVehicles[] =
 	// Saab JAS 39 Gripen
     {	"Saab JAS 39 Gripen",    // descriptiveName
 	"Jas-39",					// tinyName
-	"jas-39",					// modelName
+	"models/vehicles/air/jas-39",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -623,10 +611,9 @@ completeVehicleData_t availableVehicles[] =
 	// Harrier GR-7
     {	"Harrier GR-7",		    // descriptiveName
 	"GR-7",						// tinyName
-	"gr7",						// modelName
+	"models/vehicles/air/gr7",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -672,10 +659,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-14 Tomcat
     {	"F-14 Tomcat",		    // descriptiveName
 	"F-14",						// tinyName
-	"f-14",						// modelName
+	"models/vehicles/air/f-14",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -721,10 +707,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-18 Hornet
     {	"F-18 Hornet",		    // descriptiveName
 	"F-18",						// tinyName
-	"f-18",						// modelName
+	"models/vehicles/air/f-18",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -770,10 +755,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-22 Raptor
     {	"F-22 Raptor",		    // descriptiveName
 	"F-22",						// tinyName
-	"f-22",						// modelName
+	"models/vehicles/air/f-22",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -821,10 +805,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-105
     {	"F-105",			// descriptiveName
 	"F-105",					// tinyName
-	"f-105",					// modelName
+	"models/vehicles/air/f-105",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -870,10 +853,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-5 Tiger
     {	"F-5 Tiger",		    // descriptiveName
 	"F-5",						// tinyName
-	"f-5",						// modelName
+	"models/vehicles/air/f-5",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -919,10 +901,9 @@ completeVehicleData_t availableVehicles[] =
 	// F-15 Eagle
     {	"F-15 Eagle",		    // descriptiveName
 	"F-15",						// tinyName
-	"f-15",						// modelName
+	"models/vehicles/air/f-15",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -968,10 +949,9 @@ completeVehicleData_t availableVehicles[] =
 	// SU-27 Flanker
     {	"SU-27 Flanker",		// descriptiveName
 	"SU-27",					// tinyName
-	"su-27",					// modelName
+	"models/vehicles/air/su-27",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -1017,10 +997,9 @@ completeVehicleData_t availableVehicles[] =
 	// YF-23
     {	"YF-23",			    // descriptiveName
 	"YF-23",					// tinyName
-	"yf-23",					// modelName
+	"models/vehicles/air/yf-23",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -1066,10 +1045,9 @@ completeVehicleData_t availableVehicles[] =
 	// A-10 Thunderbolt II
     {	"A-10 Thunderbolt II",  // descriptiveName
 	"A-10",						// tinyName
-	"a10",						// modelName
+	"models/vehicles/air/a10",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -1121,10 +1099,9 @@ completeVehicleData_t availableVehicles[] =
 	// B-2 Spirit
     {	"B-2 Spirit",		    // descriptiveName
 	"B-2",						// tinyName
-	"b-2",						// modelName
+	"models/vehicles/air/b-2",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -1171,10 +1148,9 @@ completeVehicleData_t availableVehicles[] =
 	// B-2 Spirit (NB loadout)
 	{	"B-2 Spirit (NB loadout)",	// descriptiveName
 	"B-2",						// tinyName
-	"b-2",						// modelName
+	"models/vehicles/air/b-2",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -1222,10 +1198,9 @@ completeVehicleData_t availableVehicles[] =
 	// B-17g
     {	"B-17g",				// descriptiveName
 	"B-17",						// tinyName
-	"b17g",						// modelName
+	"models/vehicles/air/b17g",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -1272,10 +1247,9 @@ completeVehicleData_t availableVehicles[] =
 	// B-17g bomber (incendiary bomb loadout)
     {	"B-17g (incendiary bomb loadout)",	// descriptiveName
 	"B-17",						// tinyName
-	"b17g",						// modelName
+	"models/vehicles/air/b17g",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_BOMBER,
 	0,							// flags
@@ -1316,7 +1290,6 @@ completeVehicleData_t availableVehicles[] =
 	0,							// max bay frame
 	0,							// renderflags
 	{-12,0,60,60},				// shadow coordinates
-
 	{0,0,0,0}					// shadow orientation adjusters
 	},
 	
@@ -1328,10 +1301,9 @@ completeVehicleData_t availableVehicles[] =
 	
 	{	"UH-1 Iroquois",		// descriptiveName
 	"UH-1",						// tinyName
-	"UH-1",						// modelName
+	"models/vehicles/air/helos/UH-1",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_HELO,
 	CLASS_HELO_RECON,
 	0,							// flags
@@ -1355,7 +1327,7 @@ completeVehicleData_t availableVehicles[] =
 	285,						// max gun pitch (upwards = negative) <- gearheight
 	5,							// min gun pitch (downwards = positive) <- tailangle
 	0, WI_ASM_8KG, 0, 0, 0, 0, 0, 0,	// weapons
-	0, 2, 0, 0, 0, 0, 0, 0,		// ammo
+	0, 2, 0, 0, 0, 0, 0, 0,	// ammo
 	1,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
 	0,							// effect model
@@ -1374,12 +1346,12 @@ completeVehicleData_t availableVehicles[] =
     },
 
 	// Rebels
-	{	"Mil Mi-24 Hind",				// descriptiveName
+	
+	{	"Mil Mi-24 Hind",		// descriptiveName
 	"Hind",						// tinyName
-	"Hind",						// modelName
+	"models/vehicles/air/helos/hind",						// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_HELO,
 	CLASS_HELO_RECON,
 	0,							// flags
@@ -1428,12 +1400,11 @@ completeVehicleData_t availableVehicles[] =
 	// Coalition
 	
 	// Spitfire Mk VB fighter UAV
-    {	"Spitfire Mk VB F UAV",		// descriptiveName
+    {	"Spitfire Mk VB F UAV",	// descriptiveName
 	"Spitfire",					// tinyName
-	"spitfire_mk5b",			// modelName
+	"models/vehicles/air/spitfire_mk5b",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -1461,7 +1432,7 @@ completeVehicleData_t availableVehicles[] =
 	WI_MG_8X7_62MM, 0, 0, 0, 0, 0, 0, 0,	// weapons
 	300, 0, 0, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
-	{-4, 0, 8},					// cameraposition for cockpit view
+	{-4, 0, 6},					// cameraposition for cockpit view
 	0,							// effect model
 	0,							// radar range
 	0,							// radar range ground
@@ -1480,10 +1451,9 @@ completeVehicleData_t availableVehicles[] =
 	// P-51d Mustang ground-attack UAV
     {	"P-51d Mustang GA UAV",		// descriptiveName
 	"P-51d",					// tinyName
-	"p-51d",					// modelName
+	"models/vehicles/air/p-51d",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -1530,12 +1500,11 @@ completeVehicleData_t availableVehicles[] =
 	// Rebels
 	
 	// Me Bf 109g fighter UAV
-    {	"Me Bf 109g F UAV",// descriptiveName
+    {	"Me Bf 109g F UAV",		// descriptiveName
 	"Bf-109",					// tinyName
-	"bf-109g",					// modelName
+	"models/vehicles/air/bf-109g",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -1582,10 +1551,9 @@ completeVehicleData_t availableVehicles[] =
 	// Focke-Wulf Fw190 ground-attack UAV
     {	"Focke-Wulf Fw190 GA UAV",	// descriptiveName
 	"Fw-190",					// tinyName
-	"fw190a8",					// modelName
+	"models/vehicles/air/fw190a8",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
@@ -1642,15 +1610,14 @@ completeVehicleData_t availableVehicles[] =
 	// Fokker Dr.1 flying bomb
     {	"Fokker Dr.1 flying bomb",	// descriptiveName
 	"Fokker",					// tinyName
-	"dr1",						// modelName
+	"models/vehicles/air/dr1",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW1,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
 	HC_PROP|
-	HC_TAILDRAGGER|,			// capabilities
+	HC_TAILDRAGGER|HC_EXPLODE_ON_CRASH,	// capabilities
 	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
 	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
 	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
@@ -1691,15 +1658,14 @@ completeVehicleData_t availableVehicles[] =
 	// Sopwith camel flying bomb
     {	"Sopwith camel flying bomb", // descriptiveName
 	"Camel",					// tinyName
-	"camel",					// modelName
+	"models/vehicles/air/camel",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW1,				// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_PLANE,
 	CLASS_PLANE_FIGHTER,
 	0,							// flags
 	HC_PROP|
-	HC_TAILDRAGGER|,			// capabilities
+	HC_TAILDRAGGER|HC_EXPLODE_ON_CRASH,	// capabilities
 	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
 	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
 	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
@@ -1746,10 +1712,9 @@ completeVehicleData_t availableVehicles[] =
 	// BRDM-2
 	{	"BRDM-2",				// descriptiveName
 	"BRDM2",					// tinyName
-	"brdm2",					// modelName
+	"models/vehicles/ground/brdm2",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_GROUND,
 	CLASS_GROUND_RECON,
 	0,							// flags
@@ -1772,7 +1737,7 @@ completeVehicleData_t availableVehicles[] =
 	{3, 1, 6},					// gun tag
 	285,						// max gun pitch (upwards = negative) <- gearheight
 	5,							// min gun pitch (downwards = positive) <- tailangle
-	WI_MG_1X14_5MM, WI_HEALTHCRATE, WI_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
+	WI_MG_1X14_5MM, WI_VEHICLE_REPAIRCRATE, WI_VEHICLE_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
 	500, 5, 2, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
@@ -1796,10 +1761,9 @@ completeVehicleData_t availableVehicles[] =
 	// Fast Attack Vehicle
 	{	"Fast Attack Vehicle",	// descriptiveName
 	"FAV",						// tinyName
-	"fav",						// modelName
+	"models/vehicles/ground/fav",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_GROUND,
 	CLASS_GROUND_RECON,
 	0,							// flags
@@ -1811,7 +1775,7 @@ completeVehicleData_t availableVehicles[] =
 	{0, 100, 30},				// camera distance {min,max,default}
 	{0, 100, 10},				// camera height {min,max,default}
 	0,							// stallspeed
-	136,						    // maxspeed
+	136,						// maxspeed
 	-5,							// min throttle
 	10,						    // max throttle
 	1,							// engines
@@ -1822,7 +1786,7 @@ completeVehicleData_t availableVehicles[] =
 	{3, 1, 6},					// gun tag
 	285,						// max gun pitch (upwards = negative) <- gearheight
 	5,							// min gun pitch (downwards = positive) <- tailangle
-	WI_MG_1X7_62MM, WI_HEALTHCRATE, WI_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
+	WI_MG_1X7_62MM, WI_VEHICLE_REPAIRCRATE, WI_VEHICLE_AMMOCRATE, 0, 0, 0, 0, 0,	// weapons
 	800, 5, 2, 0, 0, 0, 0, 0,	// ammo
 	0,0,0,0,0,0,0,0,			// turret
 	{0, 0, 10},					// cameraposition for cockpit view
@@ -1850,22 +1814,21 @@ completeVehicleData_t availableVehicles[] =
 	// High Mobility Multipurpose Wheeled Vehicle (up-armoured)
 	 {	"HMMWV (up-armoured)",	// descriptiveName
 	"HMV",						// tinyName
-	"humvee_50cal",				// modelName
+	"models/vehicles/ground/humvee_50cal",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_GROUND,
 	CLASS_GROUND_RECON,
 	0,							// flags
 	HC_WHEELS,					// capabilities
-	{0,0,0,0,0,0,0,0,0,0},			// handles - SET AUTOMATICALLY
+	{0,0,0,0,0,0,0,0,0,0},		// handles - SET AUTOMATICALLY
 	{0, 0, 0},					// mins (bounding box) - SET AUTOMATICALLY
 	{0, 0, 0},					// max (bounding box) - SET AUTOMATICALLY
 	{50, 100, 100},				// turnspeed around the three axis
 	{0, 100, 30},				// camera distance {min,max,default}
 	{0, 100, 10},				// camera height {min,max,default}
 	0,							// stallspeed
-	104,						    // maxspeed
+	104,						// maxspeed
 	-5,							// min throttle
 	10,						    // max throttle
 	1,							// engines
@@ -1900,10 +1863,9 @@ completeVehicleData_t availableVehicles[] =
 	// BMP-3
     {	"BMP-3",				// descriptiveName
 	"BMP-3",					// tinyName
-	"bmp-3",					// modelName
+	"models/vehicles/ground/bmp-3",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_GROUND,
 	CLASS_GROUND_RECON,
 	0,							// flags
@@ -1954,10 +1916,9 @@ completeVehicleData_t availableVehicles[] =
 	// M1A1 Abrams
     {	"M1A1 Abrams",			// descriptiveName
 	"M1",						// tinyName
-	"m1",						// modelName
+	"models/vehicles/ground/m1",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_GROUND,
 	CLASS_GROUND_MBT,
 	0,							// flags
@@ -2004,10 +1965,9 @@ completeVehicleData_t availableVehicles[] =
 	// Panzer III
    {	"Panzer III",			// descriptiveName
 	"Pz 3",						// tinyName
-	"panzeriii",				// modelName
+	"models/vehicles/ground/panzeriii",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_GROUND,
 	CLASS_GROUND_MBT,
 	0,							// flags
@@ -2052,10 +2012,9 @@ completeVehicleData_t availableVehicles[] =
 	// M4 Sherman
     {	"M4 Sherman",			// descriptiveName
 	"M4",						// tinyName
-	"m4",				// modelName
+	"models/vehicles/ground/m4",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_WW2,				// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_GROUND,
 	CLASS_GROUND_MBT,
 	0,							// flags
@@ -2104,12 +2063,11 @@ completeVehicleData_t availableVehicles[] =
 	// Coalition
 	
 	// AN/TWQ-1 Avenger
-    {	"AN/TWQ-1 Avenger",			// descriptiveName
-	"HMVAA",						// tinyName
-	"humvee_avng",				// modelName
+    {	"AN/TWQ-1 Avenger",		// descriptiveName
+	"HMVAA",					// tinyName
+	"models/vehicles/ground/humvee_avng",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_GROUND,
 	CLASS_GROUND_SAM,
 	0,							// flags
@@ -2156,10 +2114,9 @@ completeVehicleData_t availableVehicles[] =
 	// ZSU-23-4
     {	"ZSU-23",				// descriptiveName
 	"zsu23",					// tinyName
-	"ZSU-23",					// modelName
+	"models/vehicles/ground/ZSU-23",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_GROUND,
 	CLASS_GROUND_SAM,
 	0,							// flags
@@ -2208,12 +2165,11 @@ completeVehicleData_t availableVehicles[] =
 	// Coalition
 	
 	// M110 Howitzer
-    {	"M110 Howitzer",					// descriptiveName
-	"T-90",						// tinyName
-	"t-90",						// modelName
+    {	"M110 Howitzer",		// descriptiveName
+	"M110 (T-90 camouflage)",	// tinyName
+	"models/vehicles/ground/t-90",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_2,
+	MF_TEAM_2,					// id
 	CAT_GROUND,
 	CLASS_GROUND_MBT,
 	0,							// flags
@@ -2260,10 +2216,9 @@ completeVehicleData_t availableVehicles[] =
 	// M270 Multiple Launch Rocket System
 	{	"M270 Multiple Launch Rocket System",	// descriptiveName
 	"MLRS",						// tinyName
-	"mlrs",						// modelName
+	"models/vehicles/ground/mlrs",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,				// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_GROUND,
 	CLASS_GROUND_SAM,
 	0,							// flags
@@ -2314,10 +2269,9 @@ completeVehicleData_t availableVehicles[] =
 	// Patrolboat, River 31
     {	"Patrolboat, River 31",			// descriptiveName
 	"PBR31",					// tinyName
-	"pbr31mk2",					// modelName
+	"models/vehicles/sea/pbr31mk2",					// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_BOAT,
 	CLASS_BOAT_PATROL,
 	0,							// flags
@@ -2362,12 +2316,11 @@ completeVehicleData_t availableVehicles[] =
 	// Rebels
 	
 	// Skiff
-	{	"Skiff",			// descriptiveName
+	{	"Skiff",				// descriptiveName
 	"PBR31",					// tinyName
-	"pbr31mk2",					// modelName
+	"models/vehicles/sea/skiff",	// modelName
 	SHADOW_DEFAULT,				// alpha shadow
-	MF_GAMESET_MODERN,			// id
-	MF_TEAM_1,
+	MF_TEAM_1,					// id
 	CAT_BOAT,
 	CLASS_BOAT_PATROL,
 	0,							// flags
@@ -2412,41 +2365,6 @@ completeVehicleData_t availableVehicles[] =
 	};
 
 int bg_numberOfVehicles = sizeof(availableVehicles) / sizeof(availableVehicles[0]);
-
-const char *gameset_items[MF_MAX_GAMESETS+1] =
-{
-	"Team deathmatch",
-	"Capture the flag",
-	"Objective",
-};
-
-const char *gameset_codes[MF_MAX_GAMESETS+1] =
-{
-	"teamdeathmatch",
-	"capturetheflag",
-	"objective",
-};
-
-const char *team_items[MF_MAX_GAMESETS][MF_MAX_TEAMS+1] =
-{
-	// Team deathmatch
-	{
-		"Coalition",
-		"Rebels",
-	},
-
-	// Capture the flag
-	{
-		"Coalition",
-		"Rebels",
-	},
-
-	// Objective
-	{
-		"Coalition",
-		"Rebels",
-	},
-};
 
 const char *cat_fileRef[MF_MAX_CATEGORIES+1] =
 {
