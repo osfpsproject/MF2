@@ -94,8 +94,8 @@ typedef enum {
 #define TEAM_OVERLAY_MAXNAME_WIDTH	12
 #define TEAM_OVERLAY_MAXLOCATION_WIDTH	16
 
-#define DEFAULT_REDTEAM_NAME		"Warsaw Pact"
-#define DEFAULT_BLUETEAM_NAME		"NATO"
+#define DEFAULT_REDTEAM_NAME		"Rebels"
+#define DEFAULT_BLUETEAM_NAME		"Coalition"
 
 typedef enum {
 	IMPACTSOUND_DEFAULT,

@@ -1,5 +1,5 @@
 /*
- * $Id: ui_shared.h,v 1.7 2005-11-21 17:28:32 thebjoern Exp $
+ * $Id: ui_shared.h,v 1.8 2016-04-21 osfpsproject Exp $
 */
 #ifndef __UI_SHARED_H__
 #define __UI_SHARED_H__
@@ -284,9 +284,6 @@ typedef struct {
   int itemCount;										// number of items;
   int fontIndex;										// 
   int cursorItem;										// which item as the cursor
-	int fadeCycle;										//
-	float fadeClamp;									//
-	float fadeAmount;									//
   const char *onOpen;								// run when the menu is first opened
   const char *onClose;							// run when the menu is closed
   const char *onESC;								// run when the menu is closed
@@ -328,9 +325,6 @@ struct cachedAssets_t
   sfxHandle_t menuExitSound;
   sfxHandle_t menuBuzzSound;
   sfxHandle_t itemFocusSound;
-  float fadeClamp;
-  int fadeCycle;
-  float fadeAmount;
   float shadowX;
   float shadowY;
   vec4_t shadowColor;

@@ -1,5 +1,5 @@
 /*
- * $Id: bg_mfq3util.c,v 1.7 2005-11-21 17:28:20 thebjoern Exp $
+ * $Id: bg_mfq3util.c,v 1.8 2016-04-21 osfpsproject Exp $
 */
 
 #include "q_shared.h"
@@ -20,7 +20,6 @@ MF_getIndexOfVehicleEx
 
 void MF_SetMissionScriptOverviewDefaults( mission_overview_t* overview )
 {
-	overview->gameset = -1;
 	overview->gametype = -1;
 	overview->mapname[0] = 0;
 	overview->missionname[0] = 0;
@@ -32,8 +31,7 @@ void MF_SetMissionScriptOverviewDefaults( mission_overview_t* overview )
 // so that incomplete values can be filled in
 void MF_CheckMissionScriptOverviewValid( mission_overview_t* overview, bool updateFormat )
 {
-	if( overview->gameset >= 0 &&
-		overview->gametype >= 0 &&
+	if( overview->gametype >= 0 &&
 		overview->mapname[0] > 0 &&	// very simple check
 		overview->missionname[0] > 0 &&
 		overview->objective[0] > 0 )
@@ -42,8 +40,6 @@ void MF_CheckMissionScriptOverviewValid( mission_overview_t* overview, bool upda
 	if( updateFormat )
 	{
 		overview->valid = true;
-		if( overview->gameset < 0 )
-			overview->gameset = 0;
 		if( overview->gametype < 0 )
 			overview->gametype = 0;
 		if( overview->mapname[0] == 0 )
@@ -65,7 +61,6 @@ MF_getIndexOfVehicleEx
 */
 
 int MF_getIndexOfVehicleEx( int start,
-							int gameset,
 							int team,
 							int cat,
 							int cls,
@@ -76,10 +71,10 @@ int MF_getIndexOfVehicleEx( int start,
 
 	// NOTE: vehicleClass & vehicleCat are int enum indexed, convert to flag enums
 
-	// CATAGORY
+	// CATEGORY
 	if( cat >= 0 )
 	{
-		// specific catagory
+		// specific category
 		cat = 1 << cat;		// (convert from int enum to flag enum)
 	}
 
@@ -90,7 +85,7 @@ int MF_getIndexOfVehicleEx( int start,
 		cls = 1 << cls;		// (convert from int enum to flag enum)
 	}
 
-	return MF_getIndexOfVehicle( start, gameset, team, cat, cls, vehicleType, change_vehicle, allowNukes );
+	return MF_getIndexOfVehicle( start, team, cat, cls, vehicleType, change_vehicle, allowNukes );
 }
 
 /*
@@ -99,7 +94,6 @@ MF_getIndexOfVehicle
 =================
 */
 int MF_getIndexOfVehicle( int start,			// where to start in list
-						  int gameset,
 						  int team,
 						  int cat,
 						  int cls, 
@@ -112,7 +106,6 @@ int MF_getIndexOfVehicle( int start,			// where to start in list
 	bool		done = false;
 
 	// null or negative? use ALL values
-	if( gameset <= 0 ) gameset = MF_GAMESET_ANY;
 	if( team <= 0 ) team = MF_TEAM_ANY;
 	if( cat <= 0 ) cat = CAT_ANY;
 	if( cls <= 0 ) cls = CLASS_ANY;
@@ -141,7 +134,6 @@ int MF_getIndexOfVehicle( int start,			// where to start in list
 
 		if( i == start ) done = true;//return start;	
 
-		if( !(availableVehicles[i].gameset & gameset) ) continue;			// wrong set
 		if( !(availableVehicles[i].team & team) ) continue;					// wrong team
 		if( !(availableVehicles[i].cat & cat) ) continue;					// wrong category
 		if( !(availableVehicles[i].cls & cls) ) continue;					// wrong class
@@ -185,13 +177,12 @@ int MF_getIndexOfVehicle( int start,			// where to start in list
 MF_getIndexOfGI
 =================
 */
-int MF_getIndexOfGI( int start, int gameset, int GIType, int mode)
+int MF_getIndexOfGI( int start, int GIType, int mode)
 {
     int				i;
 	int				gi_pt = -1;
 	bool		done = false;
 
-	if( gameset <= 0 ) gameset = MF_GAMESET_ANY;
 	if( start >= bg_numberOfGroundInstallations )
 		start = 0;
 	else if( start < 0 )
@@ -204,7 +195,6 @@ int MF_getIndexOfGI( int start, int gameset, int GIType, int mode)
 			i = 0;					
 
 		if( i == start ) done = true;			//return start;	
-		if( !(availableGroundInstallations[i].gameset & gameset) ) continue;			// wrong set
 		
 		if(GIType != -1) {
 			if(mode == 1 && strcmp(availableGroundInstallations[i].tinyName, availableGroundInstallations[GIType].tinyName) == 0) {
@@ -346,13 +336,13 @@ int MF_ExtractEnumFromId( int vehicle, unsigned int op )
 	// which op?
 	if( op & CAT_ANY )
 	{
-		// catagory
-		daEnum = availableVehicles[ vehicle ].cat;
+	// category
+	daEnum = availableVehicles[ vehicle ].cat;
 	}
 	else if( op & CLASS_ANY )
 	{
-		// class
-		daEnum = availableVehicles[ vehicle ].cls;
+	// class
+	daEnum = availableVehicles[ vehicle ].cls;
 	}
 
 	return daEnum;
@@ -550,12 +540,6 @@ void MF_LoadAllVehicleData()
 }
 
 
-
-
-
-
-
-
 /*
 =================
 
@@ -563,7 +547,6 @@ Mission script parsing
 
 =================
 */
-
 
 static void MF_ParseOverview( char **buf, mission_overview_t* overview ) 
 {
@@ -610,25 +593,11 @@ static void MF_ParseOverview( char **buf, mission_overview_t* overview )
 				continue;
 			}
 		}
-		else if( !strcmp( token, "gameset" ) )
-		{
-			token = COM_ParseExt( buf, false );
-			if( token[0] )
-			{
-				overview->gameset = atoi(token);
-				continue;
-			}
-		}
 		else if( !strcmp( token, "gametype" ) )
 		{
 			token = COM_ParseExt( buf, false );
-			if( token[0] )
-			{
-				overview->gametype = atoi(token);
-				continue;
-			}
-		}
-		else if( !strcmp( token, "mission" ) )
+		
+		if( !strcmp( token, "mission" ) )
 		{
 			token = COM_ParseExt( buf, false );
 			if( token[0] )
