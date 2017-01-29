@@ -1,5 +1,5 @@
 /*
- * $Id: g_team.c,v 1.6 2006-01-29 14:03:41 thebjoern Exp $
+ * $Id: g_team.c,v 1.6 2016-04-21 osfpsproject Exp $
 */
 
 // Copyright (C) 1999-2000 Id Software, Inc.
@@ -693,15 +693,6 @@ GameEntity *SelectRandomTeamSpawnPoint( int teamstate, ClientBase::eTeam team, i
 	if (teamstate == GameClient::ClientPersistant::PlayerTeamState::TEAM_BEGIN) 
 	{
 		if (team == ClientBase::TEAM_RED)
-			classname = "team_CTF_redplayer";
-		else if (team == ClientBase::TEAM_BLUE)
-			classname = "team_CTF_blueplayer";
-		else
-			return NULL;
-	} 
-	else
-	{
-		if (team == ClientBase::TEAM_RED)
 			classname = "team_CTF_redspawn";
 		else if (team == ClientBase::TEAM_BLUE)
 			classname = "team_CTF_bluespawn";
@@ -894,24 +885,6 @@ void UpdateLevelCategories( GameEntity *ent )
 	Cvar_Set( "mf_lvcat", va("%i", theLevel.ent_category_) );
 }
 
-/*QUAKED team_CTF_redplayer (1 0 0) (-16 -16 -16) (16 16 32)
-Only in CTF games.  Red players spawn here at game start.
-*/
-void SP_team_CTF_redplayer( GameEntity *ent ) 
-{
-	UpdateLevelCategories(ent);
-}
-
-
-/*QUAKED team_CTF_blueplayer (0 0 1) (-16 -16 -16) (16 16 32)
-Only in CTF games.  Blue players spawn here at game start.
-*/
-void SP_team_CTF_blueplayer( GameEntity *ent ) 
-{
-	UpdateLevelCategories(ent);
-}
-
-
 /*QUAKED team_CTF_redspawn (1 0 0) (-16 -16 -24) (16 16 32)
 potential spawning position for red team in CTF games.
 Targets will be fired when someone spawns in on them.
@@ -929,4 +902,3 @@ void SP_team_CTF_bluespawn( GameEntity *ent )
 {
 	UpdateLevelCategories(ent);
 }
-
