@@ -1,5 +1,5 @@
 /*
- * $Id: cg_weapons.c,v 1.4 2016-04-04 osfpsproject Exp $
+ * $Id: cg_weapons.c,v 1.36 2005-08-19 05:34:51 minkis Exp $
 */
 
 // Copyright (C) 1999-2000 Id Software, Inc.
@@ -284,68 +284,100 @@ void CG_RegisterWeapons() {
 			CG_RegisterItemModel(&weaponInfo->ammoModel, ammo->world_model[0] );
 		}
 
-		// switch on weapon type
-		switch( availableWeapons[i].type )
+	// switch on weapon type	
+	switch( availableWeapons[i].type )
+	{
+	
+	case WI_AAM_7KG:
+	case WI_AAM_11KG:
+	case WI_AAM_23KG:
+	case WI_AAM_39KG:
+	case WI_AAM_40KG:
+	case WI_AAM_60KG:
+	case WI_SAM_3KG:
+	case WI_ASM_8KG:
+	case WI_ASM_9KG:
+	case WI_ASM_57KG:
+	case WI_ASM_66KG:
+	case WI_SSM_0_6KG:
+	case WI_SSM_0_7KG:
+	case WI_SSM_90KG:	
+		
+	// find out which model to use
+	CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
+			
+	// MFQ3: new sound
+	CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rocketFly1.wav", qfalse );
+
+
+	// FFAR trail with no dynamic lighting
+	weaponInfo->missileTrailFunc = CG_MissileTrail2;
+	weaponInfo->missileDlight = 0;
+			
+	MAKERGB( weaponInfo->missileDlightColor, 1, 0.75f, 0 );
+	//MAKERGB( weaponInfo->flashDlightColor, 1, 0.75f, 0 );
+
+	// MFQ3: new sound
+	CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocketFire1.wav", qfalse );
+
+	break;
+	
+	case WI_SSM_0_6KG:
+	case WI_SSM_0_7KG:
+		
+	// find out which model to use
+	CG_RegisterItemModel(&weaponInfo->missileModel , availableWeapons[i].modelName );
+			
+	// MFQ3: new sound
+	CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rocketFly1.wav", qfalse );
+	
+	if( !weaponInfo->missileSound )
 		{
-		case WT_ROCKET:
-			// find out which model to use
-			CG_RegisterItemModel(&weaponInfo->missileModel , availableWeapons[i].modelName );
+		// MFQ3: old quake3 sound (backup)
+		CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rockfly.wav", qfalse );
+		}
+
+		// FFAR trail with no dynamic lighting
+		weaponInfo->missileTrailFunc = CG_FFARTrail;
+		//weaponInfo->missileTrailFunc = CG_MissileTrail2;
+		weaponInfo->missileDlight = 0;
 			
-			// MFQ3: new sound
-			CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rocketFly1.wav", qfalse );
-			if( !weaponInfo->missileSound )
-			{
-				// MFQ3: old quake3 sound (backup)
-				CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rockfly.wav", qfalse );
-			}
+		MAKERGB( weaponInfo->missileDlightColor, 1, 0.75f, 0 );
+		//MAKERGB( weaponInfo->flashDlightColor, 1, 0.75f, 0 );
 
-			// FFAR trail with no dynamic lighting
-			weaponInfo->missileTrailFunc = CG_FFARTrail;
-			//weaponInfo->missileTrailFunc = CG_MissileTrail2;
-			weaponInfo->missileDlight = 0;
-			
-			MAKERGB( weaponInfo->missileDlightColor, 1, 0.75f, 0 );
-			//MAKERGB( weaponInfo->flashDlightColor, 1, 0.75f, 0 );
+		// MFQ3: new sound
+		CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocketFire1.wav", qfalse );
+		break;
+		
 
-			// MFQ3: new sound
-			CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocketFire1.wav", qfalse );
+		case WI_BMB_227KG:
+		case WI_BMB_460KG:
+		case WI_BMB_940KG:
+		case WI_ICB_ANM50:
+		case WI_GBMB_GBU15:
+		case WI_GBMB_GBU31:
+		case WI_GBMB_BLU107
+		
+		// find out which model to use
+		CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
+		CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rockfly.wav", qfalse );
+		CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocklf1a.wav", qfalse );
+		break;
 
-			break;
-		case WT_ANTIAIRMISSILE:
-		case WT_ANTIGROUNDMISSILE:
-		case WT_ANTIRADARMISSILE:
-			// find out which model to use
-			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
-			
-			// MFQ3: new sound
-			CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rocketFly1.wav", qfalse );
+		case WI_MG_1X7_62MM:
+		case WI_MG_1X12_7MM:
+		case WI_MG_1X14_5MM:
+		case WI_AR_1X5_45MM:
+		case WI_AR_1X5_56MM:
+		case WI_SMG_1X5_7MM:
+		case WI_MG_2X7_62MM:
+		case WI_MG_2X7_92MM:
+		case WI_MG_4X12_7MM:
+		case WI_MG_8X7_62MM:
+		// MAKERGB( weaponInfo->flashDlightColor, 1, 1, 0 );
 
-
-			// FFAR trail with no dynamic lighting
-			weaponInfo->missileTrailFunc = CG_MissileTrail2;
-			weaponInfo->missileDlight = 0;
-			
-			MAKERGB( weaponInfo->missileDlightColor, 1, 0.75f, 0 );
-			//MAKERGB( weaponInfo->flashDlightColor, 1, 0.75f, 0 );
-
-			// MFQ3: new sound
-			CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocketFire1.wav", qfalse );
-
-			break;
-
-		case WT_IRONBOMB:
-		case WT_GUIDEDBOMB:
-			// find out which model to use
-			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
-			CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rockfly.wav", qfalse );
-			CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocklf1a.wav", qfalse );
-			break;
-
-		case WT_MACHINEGUN:
-			// MAKERGB( weaponInfo->flashDlightColor, 1, 1, 0 );
-
-			// MFQ3: new sounds
-			switch( i )
+		// MFQ3: new sounds
+		switch( i )
 			{
 			case WI_MG_2X7_62MM:
 			case WI_MG_2X7_92MM:
@@ -385,7 +417,18 @@ void CG_RegisterWeapons() {
 			CG_RegisterItemShader(&cgs.media.bulletExplosionShader, "bulletExplosion" );
 			break;
 
-		case WT_BALLISTICGUN:
+		case WI_ACN_1X20MM:
+		case WI_ACN_1X25MM:
+		case WI_ACN_1X27MM:
+		case WI_ACN_1X30MM:
+		case WI_ACN_2X20MM:
+		case WI_ACN_2X23MM:
+		case WI_ACN_4X23MM:
+		case WI_CNN_1X50MM:
+		case WI_CNN_1X75MM:
+		case WI_CNN_1X100MM:
+		case WI_CNN_1X120MM:
+		case WI_HOW_1X203MM:
 			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
 			CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rockfly.wav", qfalse );
 
@@ -397,7 +440,7 @@ void CG_RegisterWeapons() {
 			CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocklf1a.wav", qfalse );
 			break;
 
-		case WT_FLARE:
+		case WI_FLARE:
 			switch(i){
 				case WI_CFLARE:
 				case WI_FLARE:
@@ -417,17 +460,17 @@ void CG_RegisterWeapons() {
 			
 			break;
 
-		case WT_FUELTANK:
+		case WI_DROPTANK, WI_DROPTANK_PAIR:
 			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
 			weaponInfo->missileDlight = 0;
 			break;		
 
-		case WT_FLAK:
+		case WI_ACN_4X23MM:
 			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
 			weaponInfo->missileDlight = 0;
 			break;
 
-		case WT_NUKEBOMB:
+		case WI_NB_B82:
 			// find out which model to use
 			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
 			CG_RegisterItemSound(&weaponInfo->missileSound, "sound/weapons/rocket/rockfly.wav", qfalse );
@@ -435,8 +478,10 @@ void CG_RegisterWeapons() {
 			break;
 
 		// Pickup creates
-		case WT_AMMOCRATE:
-		case WT_HEALTHCRATE:
+		case WI_AMMOCRATE:
+		case WI_HEALTHCRATE:
+		case WI_VEHICLEREPAIRCRATE:
+		case WI_VEHICLEAMMOCRATE:
 			CG_RegisterItemModel(&weaponInfo->missileModel, availableWeapons[i].modelName );
 			CG_RegisterItemSound(&weaponInfo->flashSound[0], "sound/weapons/rocket/rocklf1a.wav", qfalse );
 			break;
@@ -656,13 +701,15 @@ void CG_FireWeapon( centity_t *cent ) {
 		return;
 	}
 
-	if( availableWeapons[ent->weaponIndex].type == WT_FUELTANK ) {
+	if( availableWeapons[ent->weaponIndex].type == WI_DROPTANK, WI_DROPTANK_PAIR ) {
 		while( MF_findWeaponsOfType(ent->weaponIndex, &cg_loadouts[ent->number]) )
 			MF_removeWeaponFromLoadout(ent->weaponIndex, &cg_loadouts[ent->number], 0, 0, 0 );
 		return;
 	}
 
-	if( availableWeapons[ent->weaponIndex].type == WT_MACHINEGUN ) {
+	if( availableWeapons[ent->weaponIndex].type == WI_MG_1X7_62MM, WI_MG_1X12_7MM, WI_MG_1X14_5MM, WI_AR_1X5_45MM, 
+	WI_AR_1X5_56MM, WI_SMG_1X5_7MM, WI_MG_2X7_62MM, WI_MG_2X7_92MM, WI_MG_4X12_7MM, WI_MG_8X7_62MM ) 
+	{
 		CG_FireMachinegun(cent, qtrue);
 		return;	
 	}
@@ -760,7 +807,7 @@ void CG_MissileHitWall( int weaponIndex, int clientNum, vec3_t origin, vec3_t di
 	case WI_LASE:
 	case WI_CM:
 	case WI_DROPTANK:
-	case WI_DROPTANK_SMALL:
+	case WI_DROPTANK_PAIR:
 		mod = cgs.media.dishFlashModel;
 		shader = cgs.media.rocketExplosionShader[1];
 		sfx = cgs.media.sfx_rockexp;
@@ -774,24 +821,24 @@ void CG_MissileHitWall( int weaponIndex, int clientNum, vec3_t origin, vec3_t di
 		lightColor[2] = 0.0;
 		break;
 
-	case WI_MG_1X7_62MM,
-	case WI_MG_1X12_7MM
-	case WI_MG_1X14_5MM	
-	case WI_AR_1X5_45MM,
-	case WI_AR_1X5_56MM,
-	case WI_SMG_1X5_7MM,
-	case WI_R_1X7_62MM,
+	case WI_MG_1X7_62MM:
+	case WI_MG_1X12_7MM:
+	case WI_MG_1X14_5MM:
+	case WI_AR_1X5_45MM:
+	case WI_AR_1X5_56MM:
+	case WI_SMG_1X5_7MM:
+	case WI_R_1X7_62MM:
 	case WI_MG_2X7_62MM:
 	case WI_MG_2X7_92MM:
 	case WI_MG_4X12_7MM:
 	case WI_MG_8X7_62MM:
-	case WI_ACN_1X20MM
-	case WI_ACN_1X25MM
-	case WI_ACN_1X27MM
-	case WI_ACN_1X30MM
-	case WI_ACN_2X20MM
-	case WI_ACN_2X23MM
-	case WI_ACN_4X23MM
+	case WI_ACN_1X20MM:
+	case WI_ACN_1X25MM:
+	case WI_ACN_1X27MM:
+	case WI_ACN_1X30MM:
+	case WI_ACN_2X20MM:
+	case WI_ACN_2X23MM:
+	case WI_ACN_4X23MM:
 		mod = cgs.media.bulletFlashModel;
 		shader = cgs.media.bulletExplosionShader;
 		mark = cgs.media.bulletMarkShader;
@@ -1042,4 +1089,3 @@ void CG_VehicleHit( vec3_t origin, int damage )
 
 	smoke->leType = LE_MOVE_SCALE_FADE;
 }
-
