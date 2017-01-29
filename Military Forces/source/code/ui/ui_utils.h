@@ -18,8 +18,6 @@ struct UI_Utils
 {
 	struct Command;
 	struct Command_SetFocus;
-	struct Command_FadeIn;
-	struct Command_FadeOut;
 	struct Command_Show;
 	struct Command_Hide;
 	struct Command_SetColor;
@@ -43,7 +41,7 @@ struct UI_Utils
 	//void						init_Display(UI_DisplayContext* dc);
 
 	void						window_Init( Window *w ); 
-	void						window_Paint( Window *w, float fadeAmount, float fadeClamp, float fadeCycle );
+	void						window_Paint( Window *w );
 	void						window_CloseCinematic( windowDef_t *window );
 	void						window_CacheContents( windowDef_t *window );
 
@@ -102,7 +100,6 @@ struct UI_Utils
 
 	itemDef_t*					menu_FindItemByName( menuDef_t *menu, const char *p );
 	itemDef_t*					menu_ClearFocus( menuDef_t *menu );
-	void						menu_FadeItemByName( menuDef_t *menu, const char *p, bool fadeOut );
 	void						menu_ShowItemByName( menuDef_t *menu, const char *p, bool bShow ) ;
 	void						menu_OpenByName( const char *p );
 	void						menu_CloseByName( const char *p );
@@ -166,8 +163,6 @@ struct UI_Utils
 	bool 						rect_Parse( char **p, rectDef_t *r );
 	bool 						string_Parse( char **p, const char **out );
 
-	void						fade( int *flags, float *f, float clamp, int *nextTime, int offsetTime, 
-									  bool bFlags, float fadeAmount );
 	bool						rect_ContainsPoint( rectDef_t *rect, float x, float y );
 	void						toWindowCoords( float *x, float *y, windowDef_t *window );
 	void						rect_ToWindowCoords( rectDef_t *rect, windowDef_t *window );
@@ -274,10 +269,4 @@ struct UI_Utils::StringDef
 	const char *str;
 };
 
-
-
-
-
-
 #endif // __UI_UTILS_H__
-
