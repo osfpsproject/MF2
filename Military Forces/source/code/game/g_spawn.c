@@ -146,9 +146,6 @@ field_t fields[] = {
 	{NULL}
 };
 
-
-
-
 void SP_info_player_start (GameEntity *ent);
 void SP_info_player_deathmatch (GameEntity *ent);
 void SP_info_player_intermission (GameEntity *ent);
@@ -173,10 +170,6 @@ void SP_trigger_radio (GameEntity *ent);
 void SP_func_catapult (GameEntity *ent);
 void SP_func_wires (GameEntity *ent);
 
-void SP_ai_radar (GameEntity* ent);
-void SP_ai_sam (GameEntity* ent);
-void SP_ai_flak (GameEntity* ent);
-
 void SP_trigger_always (GameEntity *ent);
 void SP_trigger_multiple (GameEntity *ent);
 
@@ -200,11 +193,17 @@ void SP_misc_model(GameEntity *ent);
 void SP_misc_portal_camera(GameEntity *ent);
 void SP_misc_portal_surface(GameEntity *ent);
 
-void SP_team_CTF_redplayer( GameEntity *ent );
-void SP_team_CTF_blueplayer( GameEntity *ent );
-
 void SP_team_CTF_redspawn( GameEntity *ent );
+void SP_team_CTF_redspawn_groundvehicle( GameEntity *ent );
+void SP_team_CTF_redspawn_aerialvehicle( GameEntity *ent );
+void SP_team_CTF_redspawn_aerialvehicle_helipad( GameEntity *ent );
+void SP_team_CTF_redspawn_maritimevehicle( GameEntity *ent );
+
 void SP_team_CTF_bluespawn( GameEntity *ent );
+void SP_team_CTF_bluespawn_groundvehicle( GameEntity *ent );
+void SP_team_CTF_bluespawn_aerialvehicle( GameEntity *ent );
+void SP_team_CTF_bluespawn_aerialvehicle_helipad( GameEntity *ent );
+void SP_team_CTF_bluespawn_maritimevehicle( GameEntity *ent );
 
 void SP_item_botroam( GameEntity *ent ) {};
 
@@ -240,9 +239,6 @@ spawn_t	spawns[] = {
 	{"func_catapult", SP_func_catapult},
 	{"func_explosive", SP_func_wires},
 
-	{"ai_radar", SP_ai_radar},
-	{"ai_sam", SP_ai_sam},
-	{"ai_flak", SP_ai_flak},
 	
 	// Triggers are brush objects that cause an effect when contacted
 	// by a living player, usually involving firing targets.
@@ -270,11 +266,17 @@ spawn_t	spawns[] = {
 	{"misc_portal_surface", SP_misc_portal_surface},
 	{"misc_portal_camera", SP_misc_portal_camera},
 
-	{"team_CTF_redplayer", SP_team_CTF_redplayer},
-	{"team_CTF_blueplayer", SP_team_CTF_blueplayer},
-
-	{"team_CTF_redspawn", SP_team_CTF_redspawn},
 	{"team_CTF_bluespawn", SP_team_CTF_bluespawn},
+	{"team_CTF_bluespawn_groundvehicle", SP_team_CTF_bluespawn_groundvehicle}, 
+	{"team_CTF_bluespawn_aerialvehicle", SP_team_CTF_bluespawn_aerialvehicle}, 
+	{"team_CTF_bluespawn_aerialvehicle_helipad", SP_team_CTF_bluespawn_helipad},
+	{"team_CTF_bluespawn_maritimevehicle", SP_team_CTF_bluespawn_maritimevehicle},
+	
+	{"team_CTF_redspawn", SP_team_CTF_redspawn},
+	{"team_CTF_redspawn_groundvehicle", SP_team_CTF_redspawn},
+	{"team_CTF_redspawn_aerialvehicle", SP_team_CTF_redspawn}, 
+	{"team_CTF_redspawn_aerialvehicle_helipad", SP_team_CTF_redspawn},
+	{"team_CTF_redspawn_maritimevehicle", SP_team_CTF_redspawn},
 
 	{"item_botroam", SP_item_botroam},
 
@@ -699,4 +701,3 @@ void G_SpawnEntitiesFromString()
 
 	theLevel.spawning_ = false;			// any future calls to G_Spawn*() will be errors
 }
-
