@@ -1,5 +1,5 @@
 /*
- * $Id: cg_testmodel.c,v 1.3 2005-11-21 17:28:20 thebjoern Exp $
+ * $Id: cg_testmodel.c,v 1.3 2016-04-21 osfpsproject Exp $
 */
 
 // Copyright (C) 1999-2000 Id Software, Inc.
@@ -162,7 +162,7 @@ static void registerTestVehicle()
 	switch( cg.testVehicleCat ) {
 	case CAT_PLANE:
 		{
-			Com_sprintf( basename, sizeof(basename), "models/vehicles/planes/%s/%s", cg.testVehicleName,
+			Com_sprintf( basename, sizeof(basename), "models/vehicles/air/%s/%s", cg.testVehicleName,
 				cg.testVehicleName );
 			for( i = 0; i < BP_PLANE_MAX_PARTS; i++ ) {
 				switch(i) {
@@ -443,4 +443,3 @@ void CG_TestGVCmd_f (void) {
 	}
 
 }
-
