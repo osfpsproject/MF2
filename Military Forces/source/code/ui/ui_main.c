@@ -1,5 +1,5 @@
 /*
- * $Id: ui_main.c,v 1.14 2005-11-26 10:06:29 thebjoern Exp $
+ * $Id: ui_main.c,v 1.15 2016-04-21 osfpsproject Exp $
 */
 /*
 =======================================================================
@@ -24,69 +24,31 @@ static const char *MonthAbbrev[] = {
 	"Oct","Nov","Dec"
 };
 
-
-static const char *skillLevels[] = {
-  "I Can Win",
-  "Bring It On",
-  "Hurt Me Plenty",
-  "Hardcore",
-  "Nightmare"
-};
-
-static const int numSkillLevels = sizeof(skillLevels) / sizeof(const char*);
-
-
 static const char *netSources[] = {
-	"Local",
-	"Mplayer",
-	"Internet",
-	"Favorites"
+	"host game (LAN)",
+	"host game (IP)",
 };
 static const int numNetSources = sizeof(netSources) / sizeof(const char*);
 
 static const serverFilter_t serverFilters[] = {
-	{"All", "" },
-	{"Military Forces", "" },
+	{"MilitaryForces2", "" },
 };
 
 static const char *teamArenaGameTypes[] = {
-	"DM",
-	"TOURNAMENT",
-	"SP",
-	"MISSIONEDITOR",
 	"TDM",
 	"CTF",
-	"1FCTF",
-	"OVERLOAD",
-	"HARVESTER",
-	"TEAMTOURNAMENT"
+	"OBJ"
 };
 
 static int const numTeamArenaGameTypes = sizeof(teamArenaGameTypes) / sizeof(const char*);
 
-static const char *mfqGamesets[] = {	// make sure this matches exactly with gameset_items[] of bg_vehicledata.c
-	"MDRN",
-	"WW2",
-	"WW1"
-};
-
-static int const numGamesets = sizeof(mfqGamesets) / sizeof(const char*);
-
 static const char *teamArenaGameNames[] = {
-	"Deathmatch",
-	"Tournament",
-	"Single Player",
-	"MFQ3 Mission Editor",
-	"Team Deathmatch",
-	"Capture the Flag",
-	"One Flag CTF",
-	"Overload",
-	"Harvester",
-	"Team Tournament",
+	"Team Death Match",
+	"Capture The Flag",
+	"Objective",
 };
 
 static int const numTeamArenaGameNames = sizeof(teamArenaGameNames) / sizeof(const char*);
-
 
 static const int numServerFilters = sizeof(serverFilters) / sizeof(serverFilter_t);
 
@@ -130,7 +92,6 @@ int ProcessNewUI( int command, int arg0, int arg1, int arg2, int arg3, int arg4,
 
 void UI_CustomChatInit( void );
 
-
 vmCvar_t  ui_new;
 vmCvar_t  ui_debug;
 vmCvar_t  ui_initialized;
@@ -142,8 +103,6 @@ void _UI_KeyEvent( int key, int down );
 void _UI_MouseEvent( int dx, int dy );
 void _UI_Refresh( int realtime );
 bool _UI_IsFullscreen( void );
-
-
 
 void AssetCache() 
 {
@@ -206,9 +165,6 @@ void _UI_DrawRect( float x, float y, float width, float height, float size, cons
 
 	refExport.SetColor( NULL );
 }
-
-
-
 
 int Text_Width(const char *text, float scale, int limit) 
 {
@@ -336,7 +292,7 @@ void Text_Paint(float x, float y, float scale, const vec4_t color, const char *t
 	if (text) 
 	{
 // TTimo: FIXME  	
-//    const unsigned char *s = text; // bk001206 - unsigned
+// const unsigned char *s = text; // bk001206 - unsigned
 		const char *s = text; // bk001206 - unsigned
 		refExport.SetColor( color );
 		memcpy(&newColor[0], &color[0], sizeof(vec4_t));
@@ -415,7 +371,7 @@ void Text_PaintWithCursor(float x, float y, float scale, const vec4_t color, con
 	if (text) 
 	{
 // TTimo: FIXME
-//    const unsigned char *s = text; // bk001206 - unsigned
+// const unsigned char *s = text; // bk001206 - unsigned
 		const char *s = text; // bk001206 - unsigned
 		refExport.SetColor( color );
 		memcpy(&newColor[0], &color[0], sizeof(vec4_t));
@@ -1115,7 +1071,7 @@ static void UI_DrawNetGameType(rectDef_t *rect, float scale, const vec4_t color,
 //	if (ui_netGameset.integer < 0 || ui_netGameset.integer > numGamesets) {
 //		Cvar_Set("ui_netGameset", "0");
 //	}
-//  Text_Paint(rect->x, rect->y, scale, color, gameset_items[ui_netGameset.integer] , 0, 0, textStyle);
+//  Text_Paint(rect->x, rect->y, scale, color, 0, 0, textStyle);
 //}
 
 static void UI_DrawJoinGameType(rectDef_t *rect, float scale, const vec4_t color, int textStyle) {
@@ -1124,8 +1080,6 @@ static void UI_DrawJoinGameType(rectDef_t *rect, float scale, const vec4_t color
 	}
   Text_Paint(rect->x, rect->y, scale, color, uiInfo.joinGameTypes[ui_joinGameType.integer].gameType , 0, 0, textStyle);
 }
-
-
 
 static int UI_TeamIndexFromName(const char *name) {
   int i;
@@ -1200,8 +1154,6 @@ static void UI_DrawPreviewCinematic(rectDef_t *rect, float scale, const vec4_t c
 	} 
 
 }
-
-
 
 static void UI_DrawSkill(rectDef_t *rect, float scale, const vec4_t color, int textStyle) {
   int i;
@@ -1299,7 +1251,6 @@ static void UI_DrawMapPreview(rectDef_t *rect, float scale, const vec4_t color, 
 	}
 }						 
 
-
 static void UI_DrawMapTimeToBeat(rectDef_t *rect, float scale, const vec4_t color, int textStyle) {
 	int minutes, seconds, time;
 	if (ui_currentMap.integer < 0 || ui_currentMap.integer > uiInfo.mapCount) {
@@ -1314,8 +1265,6 @@ static void UI_DrawMapTimeToBeat(rectDef_t *rect, float scale, const vec4_t colo
 
   Text_Paint(rect->x, rect->y, scale, color, va("%02i:%02i", minutes, seconds), 0, 0, textStyle);
 }
-
-
 
 static void UI_DrawMapCinematic(rectDef_t *rect, float scale, const vec4_t color, bool net)
 {
@@ -1400,8 +1349,6 @@ static void UI_DrawNetMapCinematic(rectDef_t *rect, float scale, const vec4_t co
 	}
 }
 
-
-
 static void UI_DrawNetFilter(rectDef_t *rect, float scale, const vec4_t color, int textStyle) {
 	if (ui_serverFilterType.integer < 0 || ui_serverFilterType.integer > numServerFilters) {
 		ui_serverFilterType.integer = 0;
@@ -1471,8 +1418,6 @@ static void UI_DrawTierGameType(rectDef_t *rect, float scale, const vec4_t color
   Text_Paint(rect->x, rect->y, scale, color, uiInfo.gameTypes[uiInfo.tierList[i].gameTypes[j]].gameType , 0, 0, textStyle);
 }
 
-
-
 static const char *UI_AIFromName(const char *name) {
 	int j;
 	for (j = 0; j < uiInfo.aliasCount; j++) {
@@ -1482,8 +1427,6 @@ static const char *UI_AIFromName(const char *name) {
 	}
 	return "James";
 }
-
-
 
 static bool updateOpponentModel = true;
 
@@ -1608,7 +1551,6 @@ static void UI_DrawAllMapsSelection(rectDef_t *rect, float scale, const vec4_t c
 static void UI_DrawOpponentName(rectDef_t *rect, float scale, const vec4_t color, int textStyle) {
   Text_Paint(rect->x, rect->y, scale, color, UI_Cvar_VariableString("ui_opponentName"), 0, 0, textStyle);
 }
-
 
 int UI_OwnerDrawWidth(int ownerDraw, float scale) 
 {
@@ -2250,9 +2192,6 @@ void UI_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
       break;
     case UI_STARTMAPCINEMATIC:
       UI_DrawMapCinematic(&rect, scale, color, true);
-      break;
-    case UI_SKILL:
-      UI_DrawSkill(&rect, scale, color, textStyle);
       break;
     case UI_BLUETEAMNAME:
       UI_DrawTeamName(&rect, scale, color, true, textStyle);
@@ -2902,8 +2841,6 @@ static bool UI_Crosshair_HandleKey(int flags, float *special, int key) {
 	return false;
 }
 
-
-
 static bool UI_SelectedPlayer_HandleKey(int flags, float *special, int key) {
   if (key == K_MOUSE1 || key == K_MOUSE2 || key == K_ENTER || key == K_KP_ENTER) {
 		int selected;
@@ -2960,9 +2897,6 @@ bool UI_OwnerDrawHandleKey(int ownerDraw, int flags, float *special, int key)
       break;
     case UI_JOINGAMETYPE:
       return UI_JoinGameType_HandleKey(flags, special, key);
-      break;
-    case UI_SKILL:
-      return UI_Skill_HandleKey(flags, special, key);
       break;
     case UI_BLUETEAMNAME:
       return UI_TeamName_HandleKey(flags, special, key, true);
@@ -3513,7 +3447,6 @@ static void UI_RefreshVehicleSelect( int change_vehicle )
 	int vehicleClass = -1;
 	static int vehicleType = -1;
 	int vehicle = -1;
-	int gameset = -1;
 	int gametype = -1;
 	int team = -1;
 	const char * pCat = NULL;
@@ -3531,8 +3464,7 @@ static void UI_RefreshVehicleSelect( int change_vehicle )
 
 	// ----------> GAMESET & TEAM <-----------
 
-	// get gameset & team (as MF_GAMESET_x and MF_TEAM_x)
-	gameset = MF_UI_GetGameset( false );
+	// get team (as MF_TEAM_x)
 	team = MF_UI_GetTeam();
 	gametype = Cvar_VariableValue("g_gametype");
 	// ----------> AVAILABLE VEHICLES <-----------
@@ -3551,7 +3483,7 @@ static void UI_RefreshVehicleSelect( int change_vehicle )
 		break;
 	}
 
-	// ----------> CATAGORY <-----------
+	// ----------> CATEGORY <-----------
 
 	// find out the current UI vehicle (based upon the known catagory+class)
 	vehicle = Cvar_VariableValue("ui_vehicle");
@@ -3561,10 +3493,10 @@ static void UI_RefreshVehicleSelect( int change_vehicle )
 
 tryCatAgain:
 
-	// is this catagory valid for the current gameset+team+catagory?
+	// is this catagory valid for the current team+catagory?
 
 	pCat = cat_items[ vehicleCat ];	// get the text
-	vehicle = MF_getIndexOfVehicleEx( (vehicle-1), gameset, team, vehicleCat, -1, -1, 0, allowNukes);
+	vehicle = MF_getIndexOfVehicleEx( (vehicle-1), team, vehicleCat, -1, -1, 0, allowNukes);
 
 	// ----------> LEVEL SPAWNS <-----------
 
@@ -3603,7 +3535,7 @@ tryClassAgain:
 	pClass = class_items[ vehicleCat ][ vehicleClass ];
 
 	// check
-	vehicle = MF_getIndexOfVehicleEx( (vehicle-1), gameset, team, vehicleCat, vehicleClass, -1, 0, allowNukes);
+	vehicle = MF_getIndexOfVehicleEx( (vehicle-1), team, vehicleCat, vehicleClass, -1, 0, allowNukes);
 		
 	if( pClass && vehicle >= 0 ) 
 	{
@@ -3625,10 +3557,10 @@ tryClassAgain:
 
 	// ----------> VEHICLE <-----------
 		
-	// is the vehicle valid for the current gameset+team+catagory+class?
+	// is the vehicle valid for the current team+catagory+class?
 
 	// Use proper selector for vehicle/GI
-	vehicle = MF_getIndexOfVehicleEx( (vehicle-1), gameset, team, vehicleCat, vehicleClass, vehicleType, change_vehicle, allowNukes);
+	vehicle = MF_getIndexOfVehicleEx( (vehicle-1), team, vehicleCat, vehicleClass, vehicleType, change_vehicle, allowNukes);
 
 	// -1 means this is not a suitable combination
 	if( vehicle == -1 )
@@ -4070,9 +4002,6 @@ void UI_RunMenuScript(char **args)
 			{
 				Cbuf_ExecuteText( EXEC_APPEND, va("callvote g_gametype %i\n",uiInfo.gameTypes[ui_netGameType.integer].gtEnum) );
 			}
-		//} else if (Q_stricmp(name, "voteSet") == 0) {	// TEMP DISABLED FOR NOW
-//			if (ui_netGameset.integer >= 0 && ui_netGameset.integer < numGamesets) 
-				//Cbuf_ExecuteText( EXEC_APPEND, va("callvote mf_gameset %s\n",gameset_codes[ui_netGameset.integer]) );
 		} 
 		else if (Q_stricmp(name, "voteLeader") == 0) 
 		{
@@ -4610,7 +4539,6 @@ serverStatusCvar_t serverStatusCvars[] = {
 	{"Address", ""},
 	{"gamename", "Game Name"},
 	{"g_gametype", "Game Type"},
-	{"mf_gameset", "MFQ3 Game Set"},
 	{"mf_version", "MFQ3 Version"},
 	{"mapname", "Map"},
 	{"version", "Version"},
@@ -5107,7 +5035,6 @@ static char * UI_CreateGameCodes( char * pInfo )
 {
 	char exInfo[ 1024 ];
 	char * pGameset = NULL, * pAddress = NULL;
-	int gameType, gameset;
 
 	// get enums
 	gameType = atoi( Info_ValueForKey( pInfo, "gametype") );
@@ -5124,17 +5051,6 @@ static char * UI_CreateGameCodes( char * pInfo )
 
 		// get complete info text
 		if( LAN_GetServerStatus( pAddress, exInfo, 1024 ) )
-		{
-			pGameset = Info_ValueForKey( exInfo, "mf_gameset");
-
-			// convert gameset string to enum
-			gameset = MF_UI_Gameset_StringToValue( pGameset, true );
-			if( gameset < numGamesets )
-			{
-				return va( "%s/%s", mfqGamesets[gameset],teamArenaGameTypes[gameType] );
-			}
-		}
-		else
 		{
 			// reset info requests
 			LAN_GetServerStatus( pAddress, NULL, 0 );
@@ -6252,7 +6168,6 @@ void UI_DrawConnectScreen( bool overlay )
 	char exInfo[1024];
 	char * pGameset = NULL;
 	float centerPoint, yStart, scale;
-	int gameset = 0;
 	menuDef_t * menu = NULL;
 
 	static bool resetRequest = false;
@@ -6300,25 +6215,6 @@ void UI_DrawConnectScreen( bool overlay )
 		{
 			// get complete info text
 			if( LAN_GetServerStatus( cstate.servername, exInfo, 1024 ) )
-			{
-				pGameset = Info_ValueForKey( exInfo, "mf_gameset");
-
-				// convert gameset string to enum
-				gameset = MF_UI_Gameset_StringToValue( pGameset, true );
-				if( gameset < numGamesets )
-				{
-					// attempt load - once only!
-					uiInfo.uiUtils.dc_->assets_.midPanelGfx = refExport.RegisterShaderNoMip( va( "ui\\assets\\mid-%s", pGameset ) );
-
-					// didn't work?
-					if( !uiInfo.uiUtils.dc_->assets_.midPanelGfx )
-					{
-						// don't try again
-						giveUpLoadingGfx = true;
-					}
-				}
-			}
-			else
 			{
 				// reset info requests
 				if( !resetRequest )
@@ -6544,9 +6440,6 @@ vmCvar_t	ui_realCaptureLimit;
 vmCvar_t	ui_realWarmUp;
 vmCvar_t	ui_serverStatusTimeOut;
 
-// MFQ3
-//vmCvar_t	ui_gameset;			// UI copy of the gameset var (not sure were going to need this - MM)
-
 // (vehicle select dialog)
 vmCvar_t	ui_vehicleCat;			// vehicle catagory value
 vmCvar_t	ui_vehicleClass;		// vehicle class value
@@ -6601,9 +6494,6 @@ static cvarTable_t		cvarTable[] = {
 	{ &ui_drawCrosshair, "cg_drawCrosshair", "4", CVAR_ARCHIVE },
 	{ &ui_drawCrosshairNames, "cg_drawCrosshairNames", "1", CVAR_ARCHIVE },
 	{ &ui_marks, "cg_marks", "1", CVAR_ARCHIVE },
-
-	// MFQ3
-//	{ &ui_gameset, "ui_gameset", "modern", CVAR_ARCHIVE | CVAR_ROM },
 
 	// (vehicle select dialog)
 	{ &ui_vehicleCat, "ui_vehicleCat", "1", CVAR_ARCHIVE | CVAR_ROM },
@@ -6861,6 +6751,3 @@ static void UI_StartServerRefresh(bool full)
 	//	}
 	//}
 }
-
-
-
