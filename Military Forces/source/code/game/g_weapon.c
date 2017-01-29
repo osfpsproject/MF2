@@ -1,5 +1,5 @@
 /*
- * $Id: g_weapon.c,v 1.3 2006-01-29 14:03:41 thebjoern Exp $
+ * $Id: g_weapon.c,v 1.4 2015-04-23 osfpsproject Exp $
 */
 
 // Copyright (C) 1999-2000 Id Software, Inc.
@@ -94,46 +94,85 @@ void FireWeapon( GameEntity *ent )
 	// fire the specific weapon
 	switch( availableWeapons[ent->s.weaponIndex].type ) 
 	{
-	case WT_ANTIAIRMISSILE:
+	case WI_AAM_7KG:
+	case WI_AAM_11KG:
+	case WI_AAM_23KG:
+	case WI_AAM_39KG:
+	case WI_AAM_40KG:
+	case WI_SAM_3KG:
 		fire_antiair( ent );
 		break;
-	case WT_ANTIGROUNDMISSILE:
-	case WT_ANTIRADARMISSILE:
+	case WI_ASM_8KG:
+	case WI_ASM_9KG:
+	case WI_ASM_57KG:
+	case WI_ASM_66KG:
 		fire_antiground( ent );
 		break;
-	case WT_ROCKET:
+	case WI_SSM_0_6KG:
+	case WI_SSM_0_7KG:
+	case WI_SSM_90KG:
 		fire_ffar( ent );
 		break;
-	case WT_IRONBOMB:
-	case WT_GUIDEDBOMB:
+	case WI_BMB_227KG:
+	case WI_BMB_460KG:
+	case WI_BMB_940KG:
+	case WI_ICB_ANM50:
+	case WI_GBMB_GBU15:
+	case WI_GBMB_GBU31:
+	case WI_GBMB_BLU107:
 		fire_ironbomb( ent );
 		break;
-	case WT_MACHINEGUN:
+	case WI_R_1X7_62MM:
+	fire rifle( ent );
+		break;
+	case WI_AR_1X5_45MM:
+	case WI_AR_1X5_56MM:
+	case WI_SMG_1X5_7MM:
+	case WI_MG_1X7_62MM:
+	case WI_MG_1X12_7MM:
+	case WI_MG_1X14_5MM:
+	case WI_MG_2X7_62MM:
+	case WI_MG_2X7_92MM:
+	case WI_MG_1X13MM:
+	case WI_MG_2X13MM:
+	case WI_MG_4X12_7MM:
+	case WI_MG_8X7_62MM:
+	fire_machinegun( ent );
+		break;
+	case WI_ACN_1X20MM
+	WI_ACN_1X25MM
+	WI_ACN_1X27MM
+	WI_ACN_1X30MM
+	WI_ACN_2X20MM
+	WI_ACN_2X23MM
 		fire_autocannon(ent, true);
 		if( availableVehicles[ent->client_->vehicle_].caps & HC_DUALGUNS ) 
 			fire_autocannon(ent, true);
 		break;
-	case WT_BALLISTICGUN:
+	case WI_CNN_1X50MM:
+	case WI_CNN_1X75MM:
+	case WI_CNN_1X100MM:
+	case WI_CNN_1X120MM:
+	case WI_HOW_1X203MM:
 		fire_maingun( ent );
 		break;
-	case WT_FUELTANK:
+	case WI_DROPTANK_SMALL:
+	case WI_DROPTANK_PAIR:
 		drop_fueltank( ent );
 		if( availableWeapons[ent->s.weaponIndex].flags & WF_FIRE_IN_PAIRS )
 			drop_fueltank( ent );
 		break;
-	case WT_FUELCRATE:
-	case WT_AMMOCRATE:
-	case WT_HEALTHCRATE:
+	case WI_HEALTHCRATE:
+	case WI_AMMOCRATE:
+	case WI_VEHICLE_REPAIRCRATE:
+	case WI_VEHICLE_AMMOCRATE:
 		drop_crate( ent );
 		break;
-	case WT_FLAK:
+	case WI_ACN_4X23MM:
 		// No client flak firing yet
 		break;
-	case WT_NUKEBOMB:
+	case WI_NB_B82:
 		fire_nukebomb ( ent );
-		break;
-	case WT_NUKEMISSILE:
-		fire_nukemissile ( ent ); 
 		break;
 	default:
 // FIXME		G_Error( "Bad ent->s.weapon" );
@@ -154,29 +193,70 @@ void FireWeapon_GI( GameEntity *ent )
 	// fire the specific weapon
 	switch( availableWeapons[ent->s.weaponIndex].type )
 	{
-	case WT_ANTIAIRMISSILE:
+	case WI_AAM_7KG:
+	case WI_AAM_11KG:
+	case WI_AAM_23KG:
+	case WI_AAM_39KG:
+	case WI_AAM_40KG:
+	case WI_SAM_3KG:
 		LaunchMissile_GI( ent );
 		break;
-	case WT_FLAK:
+	case WI_ACN_4X23MM:
 		fire_flak_GI ( ent );
 		break;
-	case WT_ANTIGROUNDMISSILE:
-	case WT_ANTIRADARMISSILE:
-	case WT_ROCKET:
-	case WT_IRONBOMB:
-	case WT_GUIDEDBOMB:
-	case WT_BALLISTICGUN:
-	case WT_FUELTANK:
-	case WT_NUKEBOMB:
-	case WT_NUKEMISSILE:
+	case WI_ASM_8KG:
+	case WI_ASM_9KG:
+	case WI_ASM_57KG:
+	case WI_ASM_66KG:
+	case WI_SSM_0_6KG:
+	case WI_SSM_0_7KG:
+	case WI_SSM_90KG:
+	case WI_SSM_0_6KG:
+	case WI_SSM_0_7KG:
+	case WI_SSM_90KG:
+	case WI_BMB_227KG:
+	case WI_BMB_460KG:
+	case WI_BMB_940KG:
+	case WI_ICB_ANM50:
+	case WI_GBMB_GBU15:
+	case WI_GBMB_GBU31:
+	case WI_GBMB_BLU107:
+	case WI_CNN_1X50MM:
+	case WI_CNN_1X75MM:
+	case WI_CNN_1X100MM:
+	case WI_CNN_1X120MM:
+	case WI_HOW_1X203MM:
+	case WI_DROPTANK_SMALL:
+	case WI_DROPTANK_PAIR:
+	case WI_NB_B82:
 		break;
-	case WT_MACHINEGUN:
+	case WI_ACN_1X20MM:
+	case WI_ACN_1X25MM:
+	case WI_ACN_1X27MM:
+	case WI_ACN_1X30MM:
+	case WI_ACN_2X20MM:
+	case WI_ACN_2X23MM:
+	case WI_ACN_4X23MM:
 		fire_autocannon_GI(ent);
 		break;
+	case WI_R_1X7_62MM:
+		fire rifle( ent );
+		break;
+	case WI_AR_1X5_45MM:
+	case WI_AR_1X5_56MM:
+	case WI_SMG_1X5_7MM:
+	case WI_MG_1X7_62MM:
+	case WI_MG_1X12_7MM:
+	case WI_MG_1X14_5MM:
+	case WI_MG_2X7_62MM:
+	case WI_MG_2X7_92MM:
+	case WI_MG_1X13MM:
+	case WI_MG_2X13MM:
+	case WI_MG_4X12_7MM:
+	case WI_MG_8X7_62MM:
+		fire_machinegun( ent );
 	default:
 // FIXME		G_Error( "Bad ent->s.weapon" );
 		break;
 	}
 }
-
-
