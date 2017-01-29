@@ -126,9 +126,9 @@ completeWeaponData_t availableWeapons[] =
 		"1x 7,62 mm machine gun",			// descriptiveName
 		"M240/PKT",							// shortName
 		"M240/PKT",							// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"						",			// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -163,9 +163,9 @@ completeWeaponData_t availableWeapons[] =
 		"1x 12,7 mm machine gun",			// descriptiveName
 		"M2 Browning (.50)",				// shortName
 		"M2 Browning (.50)",				// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -200,9 +200,9 @@ completeWeaponData_t availableWeapons[] =
 		"1x 14,5 mm machine gun",			// descriptiveName
 		"KPVT",								// shortName
 		"KPVT",								// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -237,9 +237,9 @@ completeWeaponData_t availableWeapons[] =
 		"2x 7,62 mm machine gun",			// descriptiveName
 		"double M1919 Browning (.30-06)",	// shortName
 		"double M1919 Browning (.30-06)",	// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -274,9 +274,9 @@ completeWeaponData_t availableWeapons[] =
 		"2x 7,92 mm machine gun",			// descriptiveName
 		"double MG 17",						// shortName
 		"double MG 17",						// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -311,9 +311,9 @@ completeWeaponData_t availableWeapons[] =
 		"2x 13 mm machine gun",				// descriptiveName
 		"double MG 131 (.51)",				// shortName
 		"double MG 131 (.51)",				// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -348,9 +348,9 @@ completeWeaponData_t availableWeapons[] =
 		"4x 12,7 mm machine gun",			// descriptiveName
 		"quadruple M2 Browning (.50)",		// shortName
 		"quadruple M2 Browning (.50)",		// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
@@ -385,9 +385,9 @@ completeWeaponData_t availableWeapons[] =
 		"8x 7,62 mm machine gun",			// descriptiveName
 		"octuple M1919 Browning (.30-06)",	// shortName
 		"octuple M1919 Browning (.30-06)",	// shortName2 (GVs)
-		"models/weapons/m4a1.md3",			// modelName
+		"",									// modelName
 		0,									// handle
-		"models/weapons/m4a1.md3",			// vwepName
+		"",									// vwepName
 		0,									// vwephandle
 		"hud/iconw_mg.tga",					// iconName
 		0,									// iconHandle
